@@ -1,12 +1,32 @@
 package com.condingblocks.multicopy.Services;
 
+import android.app.Dialog;
+import android.app.Presentation;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.IBinder;
+
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.PixelCopy;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.PopupWindow;
+
+
+import com.condingblocks.multicopy.R;
 
 import java.util.ArrayList;
 
@@ -32,25 +52,27 @@ public class TextCaptureService extends Service {
         clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
             @Override
             public void onPrimaryClipChanged() {
+                Log.d(TAG, "onPrimaryClipChanged: ");
                 final ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
                 String sb = "";
-                buffer.add(item.getText().toString());
-                for (String b : buffer){
-                    Log.d(TAG, "onClick: " + b);
-
-                    sb += b;
-                    sb += "\n";
-                }
-
-                ClipData thisClip = ClipData.newPlainText("MyClip",sb);
-                clipboardManager.removePrimaryClipChangedListener(this);
-                clipboardManager.setPrimaryClip(thisClip);
-                clipboardManager.addPrimaryClipChangedListener(this);
-
             }
         });
-        
+
+
+
         return super.onStartCommand(intent, flags, startId);
     }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
 }
