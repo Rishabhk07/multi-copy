@@ -33,11 +33,7 @@ public class TryActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ");
         View v = findViewById(android.R.id.content);
         String buf = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
-
-
-
         Log.d(TAG, "onCreate: " + buf);
-
     }
 
     @Override

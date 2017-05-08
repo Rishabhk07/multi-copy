@@ -19,7 +19,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.PixelCopy;
+
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;

@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.condingblocks.multicopy">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"></uses-permission>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.MainActivity" >
+        <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,21 +21,20 @@
         <service
             android:name=".Services.TextCaptureService"
             android:enabled="true"
-            android:exported="true"
-            />
+            android:exported="true" />
 
-        <activity
-            android:name=".views.TryActivity"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
+        <activity android:name=".views.TryActivity">
         </activity>
         <activity
             android:name=".views.Activities.BaseActivity"
             android:label="@string/title_activity_base"
-            >
+            ></activity>
+        <activity android:name=".views.Activities.TextCallActivity"
+            android:theme="@style/Theme.AppCompat.Translucent">
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
     </application>
 
