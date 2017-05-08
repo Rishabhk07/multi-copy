@@ -10,14 +10,107 @@
         android:layout_height="match_parent"
         card_view:cardElevation="4dp"
         card_view:cardCornerRadius="3dp">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rishabh Khanna"
-        />
-        <ListView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lv"></ListView>
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/heading">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_settings_black_18dp"
+                android:padding="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MultiCopy"
+                android:id="@+id/multicopy"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:paddingTop="16dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clear_black_18dp"
+                android:padding="10dp"
+                android:id="@+id/ivClear"
+                />
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:gravity="bottom"
+                android:layout_gravity="bottom"
+                android:id="@+id/bottomOptions"
+                android:layout_alignParentBottom="true"
+                >
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true">
+                <include
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    layout="@layout/add_notes_layout"
+                    android:id="@+id/btnLayout"
+                    ></include>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <include
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        layout="@layout/button_layout"
+                        android:id="@+id/btnLayout"
+                        ></include>
+
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                <include
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    layout="@layout/button_layout"
+                    android:id="@+id/btnLayout"
+                    ></include>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                <include
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    layout="@layout/button_layout"
+                    android:id="@+id/btnLayout"
+                    ></include>
+                </FrameLayout>
+            </LinearLayout>
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lv"
+                android:layout_below="@id/heading"
+                android:layout_above="@id/bottomOptions"></ListView>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
