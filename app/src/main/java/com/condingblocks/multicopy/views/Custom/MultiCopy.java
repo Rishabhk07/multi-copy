@@ -7,6 +7,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.condingblocks.multicopy.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.android.gms.ads.formats.NativeAdView;
 
 import java.util.ArrayList;
 
@@ -17,23 +20,31 @@ import java.util.ArrayList;
 public class MultiCopy extends View{
     private Context mContext;
     private View view;
+    private NativeExpressAdView adView;
     public MultiCopy(Context context) {
         super(context);
         mContext = context;
+
     }
 
     public View addToWindowManager(){
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = li.inflate(R.layout.dialog_layout,null);
+        adView = (NativeExpressAdView) view.findViewById(R.id.adView);
         ListView lv = (ListView) view.findViewById(R.id.lv);
         ArrayList<String> list = new ArrayList<>();
         list.add("Rishabh");
         list.add("Khanna");
-        list.add("Arnav");
-        list.add("gupta");
-        list.add("championswimmer");
+//        list.add("Arnav");
+//        list.add("gupta");
+//        list.add("championswimmer");
         ArrayAdapter arrayAdapter = new ArrayAdapter(mContext,android.R.layout.simple_list_item_1 , android.R.id.text1,list);
         lv.setAdapter(arrayAdapter);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("YOUR_DEVICE_ID")
+                .build();
+        adView.loadAd(adRequest);
+
         return view;
     }
 }
