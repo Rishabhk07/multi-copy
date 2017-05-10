@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
 import com.google.android.gms.ads.AdRequest;
@@ -21,17 +22,21 @@ public class MultiCopy extends View{
     private Context mContext;
     private View view;
     private NativeExpressAdView adView;
+    ListView lv;
+    TextView tvJustCopied;
     public MultiCopy(Context context) {
         super(context);
         mContext = context;
 
     }
 
-    public View addToWindowManager(){
+    public View addToWindowManager(String copiedText){
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = li.inflate(R.layout.dialog_layout,null);
         adView = (NativeExpressAdView) view.findViewById(R.id.adView);
-        ListView lv = (ListView) view.findViewById(R.id.lv);
+        lv = (ListView) view.findViewById(R.id.lv);
+        tvJustCopied = (TextView) view.findViewById(R.id.multicopy);
+        tvJustCopied.setText(copiedText);
         ArrayList<String> list = new ArrayList<>();
         list.add("Rishabh");
         list.add("Khanna");

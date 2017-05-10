@@ -1,5 +1,6 @@
 package com.condingblocks.multicopy.views.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,10 +17,11 @@ public class TextCallActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_call);
+        String justCopiedText = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
         Log.d(TAG, "onCreate: TextCallActivty");
         MultiCopy multiCopy = new MultiCopy(this);
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.activity_text_call);
-        View view = multiCopy.addToWindowManager();
+        View view = multiCopy.addToWindowManager(justCopiedText);
         frameLayout.addView(view);
     }
 }
