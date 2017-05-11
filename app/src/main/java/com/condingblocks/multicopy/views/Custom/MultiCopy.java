@@ -1,22 +1,22 @@
 package com.condingblocks.multicopy.views.Custom;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.condingblocks.multicopy.Adapters.CopyDataAdapter;
 import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Serializer;
-import com.condingblocks.multicopy.views.Activities.TextCallActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
-import com.google.android.gms.ads.formats.NativeAdView;
 
 import java.util.ArrayList;
 
@@ -24,28 +24,30 @@ import java.util.ArrayList;
  * Created by rishabhkhanna on 08/05/17.
  */
 
-public class MultiCopy extends View{
+public class MultiCopy extends View {
     private Context mContext;
     private View view;
     private NativeExpressAdView adView;
-    ListView lv;
+    RecyclerView rvText;
     TextView tvJustCopied;
     ImageView imClear;
     FrameLayout flNewClip;
     ArrayList<String> list;
-    ArrayAdapter arrayAdapter;
+    CopyDataAdapter copyDataAdapter;
+    LinearLayoutManager linearLayoutManager;
     public static final String TAG = "multi copy view";
+
     public MultiCopy(Context context) {
         super(context);
         mContext = context;
 
     }
 
-    public View addToWindowManager(String copiedText, final RemoveCallback removeCallback){
+    public View addToWindowManager(String copiedText, final RemoveCallback removeCallback) {
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = li.inflate(R.layout.dialog_layout,null);
+        view = li.inflate(R.layout.dialog_layout, null);
         adView = (NativeExpressAdView) view.findViewById(R.id.adView);
-        lv = (ListView) view.findViewById(R.id.lv);
+        rvText = (RecyclerView) view.findViewById(R.id.rvList);
         tvJustCopied = (TextView) view.findViewById(R.id.multicopy);
         imClear = (ImageView) view.findViewById(R.id.ivClear);
         flNewClip = (FrameLayout) view.findViewById(R.id.flNewClip);
@@ -65,8 +67,11 @@ public class MultiCopy extends View{
 
         tvJustCopied.setText(copiedText);
         list = Serializer.getStringFromSharedPrefs(mContext);
-        arrayAdapter = new ArrayAdapter(mContext,android.R.layout.simple_list_item_1 , android.R.id.text1,list);
-        lv.setAdapter(arrayAdapter);
+
+        copyDataAdapter = new CopyDataAdapter(list, mContext);
+        linearLayoutManager = new LinearLayoutManager(mContext);
+        rvText.setLayoutManager(linearLayoutManager);
+        rvText.setAdapter(copyDataAdapter);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice("YOUR_DEVICE_ID")
                 .build();
@@ -74,11 +79,10 @@ public class MultiCopy extends View{
         return view;
     }
 
-    public void clearArrayData(){
-        list = Serializer.getStringFromSharedPrefs(mContext);
+    public void clearArrayData() {
         list.clear();
-        Serializer.setStringToArrayPrefs(mContext,list);
+        Serializer.setStringToArrayPrefs(mContext, list);
         Log.d(TAG, "clearArrayData: " + list.toString());
-        arrayAdapter.notifyDataSetChanged();
+        copyDataAdapter.notifyDataSetChanged();
     }
 }

@@ -130,12 +130,13 @@
                 card_view:adSize="320x100">
             </com.google.android.gms.ads.NativeExpressAdView>
         </LinearLayout>
-            <ListView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/lv"
+                android:id="@+id/rvList"
                 android:layout_below="@id/heading"
-                android:layout_above="@id/bottomOptions"></ListView>
+                android:layout_above="@id/bottomOptions"
+                ></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
