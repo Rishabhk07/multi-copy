@@ -17,15 +17,16 @@ import java.util.ArrayList;
  */
 
 public class Serializer {
-    public static boolean setStringToArrayPrefs(Context context , String key , ArrayList<String> values ){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SharedPrefs.PREFS_KEY , Context.MODE_APPEND);
+    public static boolean setStringToArrayPrefs(Context context , String copiedText ){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SharedPrefs.PREFS_DB_NAME , Context.MODE_APPEND);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         JSONArray jsonArray= new JSONArray();
-        for(int i = 0 ;i < values.size() ; i ++ ){
-            jsonArray.put(values.get(i));
-        }
-        if(!values.isEmpty()){
-            editor.putString(key , jsonArray.toString());
+//        for(int i = 0 ;i < values.size() ; i ++ ){
+//            jsonArray.put(values.get(i));
+//        }
+        jsonArray.put(copiedText);
+        if(jsonArray.length() != 0){
+            editor.putString(SharedPrefs.PREFS_KEY , jsonArray.toString());
             editor.apply();
             return true;
         }else{
@@ -34,7 +35,7 @@ public class Serializer {
     }
 
     public static ArrayList<String> getStringFromSharedPrefs(Context context){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SharedPrefs.PREFS_KEY,Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SharedPrefs.PREFS_DB_NAME,Context.MODE_PRIVATE);
         String json = sharedPreferences.getString(SharedPrefs.PREFS_KEY,null);
         ArrayList<String> arrayList = new ArrayList<>();
         if (json != null){

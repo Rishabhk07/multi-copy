@@ -6,4 +6,5 @@ package com.condingblocks.multicopy.Constants;
 
 public class SharedPrefs {
     public static final String PREFS_KEY = "MultiCopy";
+    public static final String PREFS_DB_NAME = "Shared_MultiCopy";
 }

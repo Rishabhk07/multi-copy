@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Utils.Serializer;
 import com.condingblocks.multicopy.views.Activities.TextCallActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
@@ -48,12 +49,7 @@ public class MultiCopy extends View{
             }
         });
         tvJustCopied.setText(copiedText);
-        ArrayList<String> list = new ArrayList<>();
-        list.add("Rishabh");
-        list.add("Khanna");
-//        list.add("Arnav");
-//        list.add("gupta");
-//        list.add("championswimmer");
+        ArrayList<String> list = Serializer.getStringFromSharedPrefs(mContext);
         ArrayAdapter arrayAdapter = new ArrayAdapter(mContext,android.R.layout.simple_list_item_1 , android.R.id.text1,list);
         lv.setAdapter(arrayAdapter);
         AdRequest adRequest = new AdRequest.Builder()
