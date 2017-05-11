@@ -1,10 +1,10 @@
-package com.condingblocks.multicopy.Constants;
+package com.condingblocks.multicopy.Utils;
 
 /**
- * Created by rishabhkhanna on 11/05/17.
+ * Created by rishabhkhanna on 12/05/17.
  */
 
-public class SharedPrefs {
+public class Constants {
     public static final String PREFS_KEY = "MultiCopy";
     public static final String PREFS_DB_NAME = "Shared_MultiCopy";
 }

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.condingblocks.multicopy.Constants.SharedPrefs;
 import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Serializer;
