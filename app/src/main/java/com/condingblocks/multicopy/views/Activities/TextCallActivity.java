@@ -1,17 +1,25 @@
 package com.condingblocks.multicopy.views.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.condingblocks.multicopy.Constants.SharedPrefs;
+import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.views.Custom.MultiCopy;
 
-public class TextCallActivity extends AppCompatActivity {
+import java.util.Set;
+
+public class TextCallActivity extends AppCompatActivity{
     public static final String TAG = "TextCallActivity";
+    FrameLayout frameLayout;
+    View view;
+    RemoveCallback removeCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +28,20 @@ public class TextCallActivity extends AppCompatActivity {
         String justCopiedText = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
         Log.d(TAG, "onCreate: TextCallActivty");
         MultiCopy multiCopy = new MultiCopy(this);
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.activity_text_call);
-        View view = multiCopy.addToWindowManager(justCopiedText);
+        frameLayout = (FrameLayout) findViewById(R.id.activity_text_call);
+         removeCallback = new RemoveCallback() {
+            @Override
+            public void onViewRemoved() {
+                frameLayout.removeView(view);
+                SharedPreferences sharedPreferences = getSharedPreferences(SharedPrefs.PREFS_KEY , MODE_APPEND);
+            }
+        };
+        view = multiCopy.addToWindowManager(justCopiedText, removeCallback);
         frameLayout.addView(view);
     }
+
+    public void removeView(){
+
+    }
+
 }
