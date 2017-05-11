@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
+import android.util.Log;
 
 import com.condingblocks.multicopy.Constants.SharedPrefs;
 
@@ -17,32 +18,31 @@ import java.util.ArrayList;
  */
 
 public class Serializer {
-    public static boolean setStringToArrayPrefs(Context context , String copiedText ){
+    public static final String TAG = "Serializer";
+    public static void setStringToArrayPrefs(Context context , ArrayList<String> values ){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SharedPrefs.PREFS_DB_NAME , Context.MODE_APPEND);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         JSONArray jsonArray= new JSONArray();
-//        for(int i = 0 ;i < values.size() ; i ++ ){
-//            jsonArray.put(values.get(i));
-//        }
-        jsonArray.put(copiedText);
-        if(jsonArray.length() != 0){
+        Log.d(TAG, "setStringToArrayPrefs:" + values.toString());
+        for(int i = 0 ;i < values.size() ; i ++ ){
+            jsonArray.put(values.get(i));
+
+        }
             editor.putString(SharedPrefs.PREFS_KEY , jsonArray.toString());
             editor.apply();
-            return true;
-        }else{
-            return false;
-        }
+
     }
 
     public static ArrayList<String> getStringFromSharedPrefs(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(SharedPrefs.PREFS_DB_NAME,Context.MODE_PRIVATE);
         String json = sharedPreferences.getString(SharedPrefs.PREFS_KEY,null);
+        Log.d(TAG, "getStringFromSharedPrefs: " + json);
         ArrayList<String> arrayList = new ArrayList<>();
         if (json != null){
             try {
                 JSONArray jsonArray = new JSONArray(json);
                 for (int i = 0 ;i < json.length() ;i++){
-                        String thisCopyData = jsonArray.optString(i);
+                        String thisCopyData = jsonArray.getString(i);
                         arrayList.add(thisCopyData);
                 }
             } catch (JSONException e) {

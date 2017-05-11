@@ -14,6 +14,7 @@ import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Serializer;
 import com.condingblocks.multicopy.views.Custom.MultiCopy;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class TextCallActivity extends AppCompatActivity{
@@ -21,29 +22,42 @@ public class TextCallActivity extends AppCompatActivity{
     FrameLayout frameLayout;
     View view;
     RemoveCallback removeCallback;
+    String thisCopiedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_call);
-        final String thisCopiedText = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
+         thisCopiedText = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
         Log.d(TAG, "onCreate: TextCallActivty");
         MultiCopy multiCopy = new MultiCopy(this);
         frameLayout = (FrameLayout) findViewById(R.id.activity_text_call);
          removeCallback = new RemoveCallback() {
             @Override
             public void onViewRemoved() {
-                frameLayout.removeView(view);
-                Serializer.setStringToArrayPrefs(TextCallActivity.this,thisCopiedText);
+
                 finish();
+                Log.d(TAG, "onViewRemoved: ");
             }
         };
         view = multiCopy.addToWindowManager(thisCopiedText, removeCallback);
         frameLayout.addView(view);
     }
+    
 
-    public void removeView(){
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop: ");
+        frameLayout.removeView(view);
+        ArrayList<String> copiedArrayList = Serializer.getStringFromSharedPrefs(this);
+        copiedArrayList.add(thisCopiedText);
+        Serializer.setStringToArrayPrefs(TextCallActivity.this,copiedArrayList);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
 }
