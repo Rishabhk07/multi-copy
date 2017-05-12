@@ -1,5 +1,7 @@
 package com.condingblocks.multicopy.views.Custom;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +16,9 @@ import android.widget.TextView;
 import com.condingblocks.multicopy.Adapters.CopyDataAdapter;
 import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.Serializer;
+import com.condingblocks.multicopy.model.CopyTextModel;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 
@@ -35,6 +39,7 @@ public class MultiCopy extends View {
     ArrayList<String> list;
     CopyDataAdapter copyDataAdapter;
     LinearLayoutManager linearLayoutManager;
+    ClipboardManager clipboardManager;
     public static final String TAG = "multi copy view";
 
     public MultiCopy(Context context) {
@@ -45,6 +50,7 @@ public class MultiCopy extends View {
 
     public View addToWindowManager(String copiedText, final RemoveCallback removeCallback) {
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        clipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
         view = li.inflate(R.layout.dialog_layout, null);
         adView = (NativeExpressAdView) view.findViewById(R.id.adView);
         rvText = (RecyclerView) view.findViewById(R.id.rvList);
@@ -66,8 +72,10 @@ public class MultiCopy extends View {
         });
 
         tvJustCopied.setText(copiedText);
-        list = Serializer.getStringFromSharedPrefs(mContext);
-
+        CopyTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
+        list = thisText.getTextArrayList();
+        ClipData thisClip = ClipData.newPlainText(Constants.label, thisText.getText());
+        clipboardManager.setPrimaryClip(thisClip);
         copyDataAdapter = new CopyDataAdapter(list, mContext);
         linearLayoutManager = new LinearLayoutManager(mContext);
         rvText.setLayoutManager(linearLayoutManager);

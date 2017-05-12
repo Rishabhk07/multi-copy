@@ -7,4 +7,6 @@ package com.condingblocks.multicopy.Utils;
 public class Constants {
     public static final String PREFS_KEY = "MultiCopy";
     public static final String PREFS_DB_NAME = "Shared_MultiCopy";
+    //label for clip
+    public static final String label = "multi_copy_label";
 }

@@ -7,6 +7,8 @@ import android.provider.SyncStateContract;
 import android.util.Log;
 
 
+import com.condingblocks.multicopy.model.CopyTextModel;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -29,12 +31,13 @@ public class Serializer {
         }
             editor.putString(Constants.PREFS_KEY , jsonArray.toString());
             editor.apply();
-
     }
 
-    public static ArrayList<String> getStringFromSharedPrefs(Context context){
+    public static CopyTextModel getStringFromSharedPrefs(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS_DB_NAME,Context.MODE_PRIVATE);
         String json = sharedPreferences.getString(Constants.PREFS_KEY,null);
+        String storeCopyData  = "";
+
         Log.d(TAG, "getStringFromSharedPrefs: " + json);
         ArrayList<String> arrayList = new ArrayList<>();
         if (json != null){
@@ -43,11 +46,14 @@ public class Serializer {
                 for (int i = 0 ;i < json.length() ;i++){
                         String thisCopyData = jsonArray.getString(i);
                         arrayList.add(thisCopyData);
+                    storeCopyData +=thisCopyData;
+                    storeCopyData += "\n";
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        return arrayList;
+        return new CopyTextModel(storeCopyData,arrayList);
     }
+
 }

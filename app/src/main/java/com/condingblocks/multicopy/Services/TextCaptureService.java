@@ -56,6 +56,8 @@ public class TextCaptureService extends Service {
                 final ClipData clipData = clipboardManager.getPrimaryClip();
                 ClipData.Item item = clipData.getItemAt(0);
                 String sb = "";
+
+
             }
         });
 
