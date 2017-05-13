@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enable Smart Copy"
+        android:text="Smart Copy"
         android:layout_gravity="center"
         android:textColor="#323232"
         android:padding="5dp"/>

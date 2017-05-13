@@ -3,38 +3,40 @@
     package="com.condingblocks.multicopy">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".views.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        android:theme="@style/AppTheme"
+        >
 
         <service
             android:name=".Services.TextCaptureService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".views.TryActivity">
-        </activity>
+        <activity android:name=".views.TryActivity"></activity>
         <activity
             android:name=".views.Activities.BaseActivity"
             android:label="@string/title_activity_base"
-            ></activity>
-        <activity android:name=".views.Activities.TextCallActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.Activities.TextCallActivity"
             android:theme="@style/Theme.AppCompat.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>

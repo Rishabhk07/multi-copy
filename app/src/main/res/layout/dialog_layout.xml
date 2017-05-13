@@ -80,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/flTakeNotes"
                     >
 
                     <include
@@ -94,7 +95,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:focusable="true">
+                    android:focusable="true"
+                    android:id="@+id/flSmartCopy">
                 <include
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"

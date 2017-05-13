@@ -3,6 +3,8 @@ package com.condingblocks.multicopy.views.Custom;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,10 +20,17 @@ import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.Serializer;
 import com.condingblocks.multicopy.model.CopyTextModel;
+import com.condingblocks.multicopy.model.NotesModel;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 /**
  * Created by rishabhkhanna on 08/05/17.
@@ -35,6 +44,8 @@ public class MultiCopy extends View {
     TextView tvJustCopied;
     ImageView imClear;
     FrameLayout flNewClip;
+    FrameLayout flSaveNotes;
+    FrameLayout flSmartCopy;
     ArrayList<String> list;
     CopyDataAdapter copyDataAdapter;
     LinearLayoutManager linearLayoutManager;
@@ -47,7 +58,7 @@ public class MultiCopy extends View {
 
     }
 
-    public View addToWindowManager(String copiedText, final RemoveCallback removeCallback) {
+    public View addToWindowManager(final String copiedText, final RemoveCallback removeCallback) {
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         clipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
         view = li.inflate(R.layout.dialog_layout, null);
@@ -56,12 +67,17 @@ public class MultiCopy extends View {
         tvJustCopied = (TextView) view.findViewById(R.id.multicopy);
         imClear = (ImageView) view.findViewById(R.id.ivClear);
         flNewClip = (FrameLayout) view.findViewById(R.id.flNewClip);
+        flSaveNotes = (FrameLayout) view.findViewById(R.id.flTakeNotes);
+        flSmartCopy = (FrameLayout) view.findViewById(R.id.flSmartCopy);
         imClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeCallback.onViewRemoved();
             }
         });
+        final Realm realm = Realm.getDefaultInstance();
+        final CopyTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
+
 
         flNewClip.setOnClickListener(new OnClickListener() {
             @Override
@@ -69,8 +85,33 @@ public class MultiCopy extends View {
                 clearArrayData();
             }
         });
+
+        flSaveNotes.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                realm.beginTransaction();
+                //do all the realm saving work here
+                NotesModel notesModel = realm.createObject(NotesModel.class);
+                notesModel.setNote(thisText.getText());
+                notesModel.setCreatedAt(DateFormat.getDateTimeInstance().format(new Date()));
+                realm.commitTransaction();
+                Log.d(TAG, "onClick: saved to DB ");
+            }
+        });
+
+        flSmartCopy.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RealmQuery<NotesModel> notesModelRealmQuery = realm.where(NotesModel.class);
+                RealmResults<NotesModel> query = notesModelRealmQuery.findAll();
+                Log.d(TAG, "onClick: " + query.toString());
+            }
+        });
+
         tvJustCopied.setText(copiedText);
-        CopyTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
+
         list = thisText.getTextArrayList();
         ClipData thisClip = ClipData.newPlainText(Constants.label, thisText.getText());
         clipboardManager.setPrimaryClip(thisClip);
