@@ -37,7 +37,6 @@ public class TextCallActivity extends AppCompatActivity {
         removeCallback = new RemoveCallback() {
             @Override
             public void onViewRemoved() {
-
                 finish();
                 Log.d(TAG, "onViewRemoved: ");
             }

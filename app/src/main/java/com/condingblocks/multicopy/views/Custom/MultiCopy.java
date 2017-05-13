@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +31,7 @@ public class MultiCopy extends View {
     private Context mContext;
     private View view;
     private NativeExpressAdView adView;
-    RecyclerView rvText;
+    RecyclerView recyclerView;
     TextView tvJustCopied;
     ImageView imClear;
     FrameLayout flNewClip;
@@ -53,7 +52,7 @@ public class MultiCopy extends View {
         clipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
         view = li.inflate(R.layout.dialog_layout, null);
         adView = (NativeExpressAdView) view.findViewById(R.id.adView);
-        rvText = (RecyclerView) view.findViewById(R.id.rvList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvList);
         tvJustCopied = (TextView) view.findViewById(R.id.multicopy);
         imClear = (ImageView) view.findViewById(R.id.ivClear);
         flNewClip = (FrameLayout) view.findViewById(R.id.flNewClip);
@@ -70,7 +69,6 @@ public class MultiCopy extends View {
                 clearArrayData();
             }
         });
-
         tvJustCopied.setText(copiedText);
         CopyTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
         list = thisText.getTextArrayList();
@@ -78,8 +76,8 @@ public class MultiCopy extends View {
         clipboardManager.setPrimaryClip(thisClip);
         copyDataAdapter = new CopyDataAdapter(list, mContext);
         linearLayoutManager = new LinearLayoutManager(mContext);
-        rvText.setLayoutManager(linearLayoutManager);
-        rvText.setAdapter(copyDataAdapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(copyDataAdapter);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice("YOUR_DEVICE_ID")
                 .build();
