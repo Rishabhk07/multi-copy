@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
 import io.realm.Realm;
 
@@ -132,6 +133,14 @@ public class BaseActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            switch (position){
+                case 0:
+                    NotesFragment notesFragment = new NotesFragment();
+                            return notesFragment;
+                case 1:
+
+                    break;
+            }
             return PlaceholderFragment.newInstance(position + 1);
         }
 

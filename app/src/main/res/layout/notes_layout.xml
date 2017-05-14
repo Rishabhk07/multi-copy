@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rishabh Khannasxjsxjkkjkjkjkjkkj vj djjdjjdjjdjdjjdjdjdjdjjdjdjjdjdjjjdjdjdjdjdjdjdjdjdjdncskjcndklncaNLKSAkn"
+        android:id="@+id/tvNoteText"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:maxLines="3"
+        android:textColor="#454545"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tvCreatedAt"
+        android:text="May 14, 2017 2:02:11 AM"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

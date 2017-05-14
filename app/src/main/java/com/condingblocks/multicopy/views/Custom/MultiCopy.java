@@ -106,7 +106,12 @@ public class MultiCopy extends View {
             public void onClick(View v) {
                 RealmQuery<NotesModel> notesModelRealmQuery = realm.where(NotesModel.class);
                 RealmResults<NotesModel> query = notesModelRealmQuery.findAll();
-                Log.d(TAG, "onClick: " + query.toString());
+
+                ArrayList<NotesModel> notesList = new ArrayList<NotesModel>();
+                notesList.addAll(query);
+                for (NotesModel n : notesList){
+                    Log.d(TAG, "onClick: " + n.getNote());
+                }
             }
         });
 
