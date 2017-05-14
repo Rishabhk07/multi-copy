@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         card_view:cardElevation="4dp"
-        card_view:cardCornerRadius="3dp">
+        card_view:cardCornerRadius="3dp"
+        android:backgroundTint="@android:color/white">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,8 +82,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/flTakeNotes"
+                    android:clickable="true"
+                    android:focusable="true"
                     >
-
                     <include
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
@@ -96,7 +98,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusable="true"
-                    android:id="@+id/flSmartCopy">
+                    android:clickable="true"
+                    android:id="@+id/flSmartCopy"
+                    >
                 <include
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"

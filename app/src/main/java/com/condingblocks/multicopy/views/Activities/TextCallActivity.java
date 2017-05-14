@@ -51,6 +51,7 @@ public class TextCallActivity extends AppCompatActivity {
         super.onStop();
         Log.d(TAG, "onStop: ");
         frameLayout.removeView(view);
+        finish();
     }
 
     @Override
