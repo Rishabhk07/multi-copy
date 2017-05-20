@@ -3,6 +3,7 @@ package com.condingblocks.multicopy.views.Custom;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import com.condingblocks.multicopy.Adapters.CopyDataAdapter;
 import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Services.MyIntentService;
+import com.condingblocks.multicopy.Services.TextCaptureService;
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.Serializer;
 import com.condingblocks.multicopy.model.ClipboardTextModel;
@@ -84,18 +87,25 @@ public class MultiCopy extends View {
 
                 smartCopyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
+                Intent i = new Intent(mContext, TextCaptureService.class);
                 if (smartCopyToggle){
+                    // smart copy is on
                     smartCopyToggle = false;
                     Log.d(TAG, "onClick: true");
+
+                    mContext.startService(i);
                 }else{
+                    //smart copy is off
                     smartCopyToggle = true;
                     Log.d(TAG, "onClick: false");
+                    mContext.stopService(i);
                 }
                 editor.putBoolean(Constants.SMART_COPY_PREFS,smartCopyToggle);
                 if(editor.commit()){
                     checkSmartCopy();
                 };
                 Log.d(TAG, "onClick: SmartCopy");
+
             }
         });
 
@@ -157,7 +167,7 @@ public class MultiCopy extends View {
 
     public void checkSmartCopy(){
         boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
-        if(smartCopyToggle){
+        if(copyToggle){
             tvsmartCopy.setText("Enable\nSmart Copy");
         }else{
             tvsmartCopy.setText("Disable\nSmart Copy");

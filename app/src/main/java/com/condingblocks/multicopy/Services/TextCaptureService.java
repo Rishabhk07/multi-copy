@@ -28,10 +28,12 @@ import android.widget.PopupWindow;
 
 import com.condingblocks.multicopy.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TextCaptureService extends Service {
     ClipboardManager clipboardManager;
+    static boolean toggleService = false;
     public static final String TAG = "Capture Service";
     ArrayList<String> buffer = new ArrayList<>();
     public TextCaptureService() {
@@ -47,21 +49,32 @@ public class TextCaptureService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         Log.d(TAG, "onStartCommand: ");
+        toggleService = true;
+        final ArrayList<String> copiedDataArray = new ArrayList<>();
 
 
-        clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
-            @Override
-            public void onPrimaryClipChanged() {
-                Log.d(TAG, "onPrimaryClipChanged: ");
-                final ClipData clipData = clipboardManager.getPrimaryClip();
-                ClipData.Item item = clipData.getItemAt(0);
-                String sb = "";
+            clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+                @Override
+                public void onPrimaryClipChanged() {
+                    Log.d(TAG, "onPrimaryClipChanged: before changing");
+                    if(toggleService) {
+                        Log.d(TAG, "onPrimaryClipChanged: ");
+                        final ClipData clipData = clipboardManager.getPrimaryClip();
+                        ClipData.Item item = clipData.getItemAt(0);
+                        String thisText = item.getText().toString();
+                        String sb = "";
+                        copiedDataArray.add(thisText);
+                        for (String text : copiedDataArray) {
+                            sb += text + "\n";
+                        }
 
-
-            }
-        });
-
-
+                        ClipData copiedClip = ClipData.newPlainText("copiedClip", sb);
+                        clipboardManager.removePrimaryClipChangedListener(this);
+                        clipboardManager.setPrimaryClip(copiedClip);
+                        clipboardManager.addPrimaryClipChangedListener(this);
+                    }
+                }
+            });
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -74,7 +87,8 @@ public class TextCaptureService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+        stopSelf();
+        toggleService = false;
     }
-
-
 }

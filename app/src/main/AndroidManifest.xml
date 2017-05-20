@@ -11,20 +11,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="AA"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-
+        android:theme="@style/AppTheme">
         <service
             android:name=".Services.TextCaptureService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"></service>
 
-        <activity android:name=".views.TryActivity"></activity>
+        <activity android:name=".views.TryActivity" />
         <activity
             android:name=".views.Activities.BaseActivity"
             android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +37,10 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".Services.MyIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
