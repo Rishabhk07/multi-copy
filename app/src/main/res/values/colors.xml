@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#38006b</color>
     <color name="colorAccent">#FF4081</color>
     <color name="translucent">#99000000</color>
+    <color name="list_item_selected_state">#99000000</color>
 </resources>

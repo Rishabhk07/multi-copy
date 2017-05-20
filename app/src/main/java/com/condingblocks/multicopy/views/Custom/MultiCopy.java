@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -137,4 +138,6 @@ public class MultiCopy extends View {
         Log.d(TAG, "clearArrayData: " + list.toString());
         copyDataAdapter.notifyDataSetChanged();
     }
+
+
 }
