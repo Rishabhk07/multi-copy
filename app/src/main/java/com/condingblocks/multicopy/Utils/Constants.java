@@ -9,4 +9,6 @@ public class Constants {
     public static final String PREFS_DB_NAME = "Shared_MultiCopy";
     //label for clip
     public static final String label = "multi_copy_label";
+    //smart copy toggle key
+    public static final String SMART_COPY_PREFS = "smart_key";
 }

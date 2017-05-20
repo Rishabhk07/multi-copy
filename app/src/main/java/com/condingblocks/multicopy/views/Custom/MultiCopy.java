@@ -3,6 +3,8 @@ package com.condingblocks.multicopy.views.Custom;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,7 +49,10 @@ public class MultiCopy extends View {
     ArrayList<String> list;
     CopyDataAdapter copyDataAdapter;
     LinearLayoutManager linearLayoutManager;
+    boolean smartCopyToggle = false;
+    TextView tvsmartCopy;
     ClipboardManager clipboardManager;
+    SharedPreferences sharedPreferences;
     public static final String TAG = "multi copy view";
 
     public MultiCopy(Context context) {
@@ -67,13 +72,40 @@ public class MultiCopy extends View {
         flNewClip = (FrameLayout) view.findViewById(R.id.flNewClip);
         flSaveNotes = (FrameLayout) view.findViewById(R.id.flTakeNotes);
         flSmartCopy = (FrameLayout) view.findViewById(R.id.flSmartCopy);
+        tvsmartCopy = (TextView) view.findViewById(R.id.tvSmartCopy);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        checkSmartCopy();
+        Realm.init(mContext);
+
+
+        flSmartCopy.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                smartCopyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                if (smartCopyToggle){
+                    smartCopyToggle = false;
+                    Log.d(TAG, "onClick: true");
+                }else{
+                    smartCopyToggle = true;
+                    Log.d(TAG, "onClick: false");
+                }
+                editor.putBoolean(Constants.SMART_COPY_PREFS,smartCopyToggle);
+                if(editor.commit()){
+                    checkSmartCopy();
+                };
+                Log.d(TAG, "onClick: SmartCopy");
+            }
+        });
+
         imClear.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeCallback.onViewRemoved();
             }
         });
-        Realm.init(mContext);
+
         final Realm realm = Realm.getDefaultInstance();
         final ClipboardTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
 
@@ -100,20 +132,6 @@ public class MultiCopy extends View {
             }
         });
 
-        flSmartCopy.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RealmQuery<NotesModel> notesModelRealmQuery = realm.where(NotesModel.class);
-                RealmResults<NotesModel> query = notesModelRealmQuery.findAll();
-
-                ArrayList<NotesModel> notesList = new ArrayList<NotesModel>();
-                notesList.addAll(query);
-                for (NotesModel n : notesList){
-                    Log.d(TAG, "onClick: " + n.getNote());
-                }
-            }
-        });
-
         tvJustCopied.setText(copiedText);
 
         list = thisText.getTextArrayList();
@@ -135,6 +153,15 @@ public class MultiCopy extends View {
         Serializer.setStringToArrayPrefs(mContext, list);
         Log.d(TAG, "clearArrayData: " + list.toString());
         copyDataAdapter.notifyDataSetChanged();
+    }
+
+    public void checkSmartCopy(){
+        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
+        if(smartCopyToggle){
+            tvsmartCopy.setText("Enable\nSmart Copy");
+        }else{
+            tvsmartCopy.setText("Disable\nSmart Copy");
+        }
     }
 
 

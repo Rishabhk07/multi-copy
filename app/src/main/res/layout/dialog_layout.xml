@@ -78,15 +78,16 @@
                 >
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/flTakeNotes"
                     android:clickable="true"
                     android:focusable="true"
+
                     >
                     <include
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         layout="@layout/add_notes_layout"
                         android:id="@+id/btnLayout"
@@ -94,8 +95,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:focusable="true"
                     android:clickable="true"
@@ -109,12 +110,12 @@
                     ></include>
                 </FrameLayout>
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/flNewClip">
                 <include
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     layout="@layout/button_layout"
                     android:id="@+id/btnLayout"
