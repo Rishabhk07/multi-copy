@@ -2,12 +2,10 @@ package com.condingblocks.multicopy.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.provider.SyncStateContract;
 import android.util.Log;
 
 
-import com.condingblocks.multicopy.model.CopyTextModel;
+import com.condingblocks.multicopy.model.ClipboardTextModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +31,7 @@ public class Serializer {
             editor.apply();
     }
 
-    public static CopyTextModel getStringFromSharedPrefs(Context context){
+    public static ClipboardTextModel getStringFromSharedPrefs(Context context){
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS_DB_NAME,Context.MODE_PRIVATE);
         String json = sharedPreferences.getString(Constants.PREFS_KEY,null);
         String storeCopyData  = "";
@@ -53,7 +51,7 @@ public class Serializer {
                 e.printStackTrace();
             }
         }
-        return new CopyTextModel(storeCopyData,arrayList);
+        return new ClipboardTextModel(storeCopyData,arrayList);
     }
 
 }

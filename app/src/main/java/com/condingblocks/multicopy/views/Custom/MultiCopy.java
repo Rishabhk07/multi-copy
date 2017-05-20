@@ -3,13 +3,10 @@ package com.condingblocks.multicopy.views.Custom;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -20,7 +17,7 @@ import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.Serializer;
-import com.condingblocks.multicopy.model.CopyTextModel;
+import com.condingblocks.multicopy.model.ClipboardTextModel;
 import com.condingblocks.multicopy.model.NotesModel;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.NativeExpressAdView;
@@ -76,8 +73,9 @@ public class MultiCopy extends View {
                 removeCallback.onViewRemoved();
             }
         });
+        Realm.init(mContext);
         final Realm realm = Realm.getDefaultInstance();
-        final CopyTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
+        final ClipboardTextModel thisText = Serializer.getStringFromSharedPrefs(mContext);
 
 
         flNewClip.setOnClickListener(new OnClickListener() {

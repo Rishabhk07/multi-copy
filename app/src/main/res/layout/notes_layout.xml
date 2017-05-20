@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rishabh Khannasxjsxjkkjkjkjkjkkj vj djjdjjdjjdjdjjdjdjdjdjjdjdjjdjdjjjdjdjdjdjdjdjdjdjdjdncskjcndklncaNLKSAkn"
+        android:text="Rishabh Khannasxjsxjkkjkjkjkj"
         android:id="@+id/tvNoteText"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"

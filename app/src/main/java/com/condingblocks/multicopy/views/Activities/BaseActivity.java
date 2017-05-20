@@ -1,6 +1,5 @@
 package com.condingblocks.multicopy.views.Activities;
 
-import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.views.Fragments.ClipboardFragment;
 import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
 import io.realm.Realm;
@@ -49,6 +49,7 @@ public class BaseActivity extends AppCompatActivity {
         Realm.init(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -139,8 +140,8 @@ public class BaseActivity extends AppCompatActivity {
                     NotesFragment notesFragment = new NotesFragment();
                             return notesFragment;
                 case 1:
-
-                    break;
+                    ClipboardFragment clipboardFragment = new ClipboardFragment();
+                            return clipboardFragment;
             }
             return PlaceholderFragment.newInstance(position + 1);
         }

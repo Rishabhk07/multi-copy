@@ -6,11 +6,11 @@ import java.util.ArrayList;
  * Created by rishabhkhanna on 12/05/17.
  */
 
-public class CopyTextModel {
+public class ClipboardTextModel {
     String text;
     ArrayList<String> textArrayList;
 
-    public CopyTextModel(String text, ArrayList<String> textArrayList) {
+    public ClipboardTextModel(String text, ArrayList<String> textArrayList) {
         this.text = text;
         this.textArrayList = textArrayList;
     }

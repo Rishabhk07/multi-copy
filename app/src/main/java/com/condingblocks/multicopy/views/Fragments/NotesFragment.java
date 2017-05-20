@@ -42,17 +42,27 @@ public class NotesFragment extends Fragment{
         View root =  inflater.inflate(R.layout.fragment_notes, container, false);
         recyclerView = (RecyclerView) root.findViewById(R.id.rvNotesList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        Realm realm = Realm.getDefaultInstance();
-        RealmQuery<NotesModel> notesModelRealmQuery = realm.where(NotesModel.class);
-        RealmResults<NotesModel> query = notesModelRealmQuery.findAll();
         notesList = new ArrayList<>();
-        notesList.addAll(query);
         Log.d(TAG, "onCreateView: " + notesList.toString());
         notesAdapter = new NotesAdapter(notesList,getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(notesAdapter);
+        refreshData();
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshData();
+    }
 
+    private void refreshData(){
+        Realm realm = Realm.getDefaultInstance();
+        RealmQuery<NotesModel> notesModelRealmQuery = realm.where(NotesModel.class);
+        RealmResults<NotesModel> query = notesModelRealmQuery.findAll();
+        notesList.clear();
+        notesList.addAll(query);
+        notesAdapter.notifyDataSetChanged();
+    }
 }
