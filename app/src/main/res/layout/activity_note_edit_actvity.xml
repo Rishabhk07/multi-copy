@@ -15,7 +15,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:titleTextColor="@android:color/white"
-
+        app:theme="@style/ToolbarStyle"
         />
 
     <EditText
