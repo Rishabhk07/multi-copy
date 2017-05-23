@@ -40,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public static final String TAG = "BaseActivity";
-    NotesFragment notesFragment;
+    NotesFragment notesFragment = new NotesFragment();
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -142,7 +142,6 @@ public class BaseActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-                     notesFragment = new NotesFragment();
                             return notesFragment;
                 case 1:
                     ClipboardFragment clipboardFragment = new ClipboardFragment();
@@ -173,9 +172,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, "onActivityResult: ");
         if(requestCode == Constants.NOTES_RESULT){
-            Log.d(TAG, "onActivityResult: data changing");
-            Log.d(TAG, "onActivityResult: " + data.getStringExtra(Constants.ACTIVITY_RESULT_TEXT));
-            Log.d(TAG, "onActivityResult: " + data.getIntExtra(Constants.ACTIVITY_RESULT_POSITION,90));
 
             if(data != null){
                 String text = data.getStringExtra(Constants.ACTIVITY_RESULT_TEXT);
