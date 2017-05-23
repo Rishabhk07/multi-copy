@@ -1,5 +1,6 @@
 package com.condingblocks.multicopy.views.Activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.views.Fragments.ClipboardFragment;
 import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
@@ -36,6 +39,8 @@ public class BaseActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    public static final String TAG = "BaseActivity";
+    NotesFragment notesFragment;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -137,7 +142,7 @@ public class BaseActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-                    NotesFragment notesFragment = new NotesFragment();
+                     notesFragment = new NotesFragment();
                             return notesFragment;
                 case 1:
                     ClipboardFragment clipboardFragment = new ClipboardFragment();
@@ -162,5 +167,22 @@ public class BaseActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult: ");
+        if(requestCode == Constants.NOTES_RESULT){
+            Log.d(TAG, "onActivityResult: data changing");
+            Log.d(TAG, "onActivityResult: " + data.getStringExtra(Constants.ACTIVITY_RESULT_TEXT));
+            Log.d(TAG, "onActivityResult: " + data.getIntExtra(Constants.ACTIVITY_RESULT_POSITION,90));
+
+            if(data != null){
+                String text = data.getStringExtra(Constants.ACTIVITY_RESULT_TEXT);
+                int position = data.getIntExtra(Constants.ACTIVITY_RESULT_POSITION,0);
+                notesFragment.onNotesEdit(text,position);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

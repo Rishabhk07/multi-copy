@@ -15,7 +15,7 @@
         <service
             android:name=".Services.TextCaptureService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name=".views.TryActivity" />
         <activity
@@ -40,7 +40,9 @@
 
         <service
             android:name=".Services.MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity android:name=".views.Activities.NoteEditActvity"></activity>
     </application>
 
 </manifest>

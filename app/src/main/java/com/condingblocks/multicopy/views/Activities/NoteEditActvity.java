@@ -1,0 +1,45 @@
+package com.condingblocks.multicopy.views.Activities;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
+
+import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Utils.Constants;
+import com.condingblocks.multicopy.model.NotesModel;
+import com.google.gson.Gson;
+
+public class NoteEditActvity extends AppCompatActivity {
+    EditText etNotesDetail;
+    Gson gson = new Gson();
+    public static final String TAG = "NotesEdit";
+    int position;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_note_edit_actvity);
+        Intent i = getIntent();
+        String thisNote = i.getStringExtra(Constants.NOTES_EDIT_TEXT);
+        position = i.getIntExtra(Constants.NOTES_EDIT_POSITION,0);
+        Log.d(TAG, "onCreate: ");
+        etNotesDetail = (EditText) findViewById(R.id.etNoteEdit);
+        Log.d(TAG, "onCreate: " + thisNote);
+        etNotesDetail.setText(thisNote);
+        if(thisNote != null)
+        etNotesDetail.setSelection(thisNote.length());
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent();
+        Log.d(TAG, "onBackPressed: " + etNotesDetail.getText());
+        i.putExtra(Constants.ACTIVITY_RESULT_TEXT,etNotesDetail.getText().toString());
+        i.putExtra(Constants.ACTIVITY_RESULT_POSITION,position);
+        setResult(Constants.NOTES_RESULT,i);
+        super.onBackPressed();
+    }
+}

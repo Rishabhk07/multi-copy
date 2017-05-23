@@ -1,6 +1,7 @@
 package com.condingblocks.multicopy.views.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,8 +13,10 @@ import android.view.ViewGroup;
 
 
 import com.condingblocks.multicopy.Adapters.NotesAdapter;
+import com.condingblocks.multicopy.Interfaces.onNotesEdit;
 import com.condingblocks.multicopy.R;
 
+import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.model.NotesModel;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import io.realm.RealmResults;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotesFragment extends Fragment{
+public class NotesFragment extends Fragment implements onNotesEdit {
 
     RecyclerView recyclerView;
     NotesAdapter notesAdapter;
@@ -52,6 +55,16 @@ public class NotesFragment extends Fragment{
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //since adapter is calling an activity
+        Log.d(TAG, "onActivityResult: ");
+        if(requestCode == Constants.NOTES_RESULT){
+            Log.d(TAG, "onActivityResult: ");
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         refreshData();
@@ -64,5 +77,16 @@ public class NotesFragment extends Fragment{
         notesList.clear();
         notesList.addAll(query);
         notesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onNotesEdit(String notes, int position) {
+        Log.d(TAG, "onNotesEdit: " + notes);
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        notesList.get(position).setNote(notes);
+        notesAdapter.notifyItemChanged(position);
+        realm.copyToRealm(notesList.get(position));
+        realm.commitTransaction();
     }
 }

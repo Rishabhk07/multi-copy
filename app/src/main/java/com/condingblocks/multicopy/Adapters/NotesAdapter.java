@@ -1,11 +1,13 @@
 package com.condingblocks.multicopy.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +18,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.model.NotesModel;
+import com.condingblocks.multicopy.views.Activities.NoteEditActvity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +36,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private SparseBooleanArray selectionItems;
     public ArrayList<NotesModel> selected_userLists = new ArrayList<>();
 
+    Gson gson = new Gson();
+    public static final String TAG = "NotesAdapter";
     public NotesAdapter(ArrayList<NotesModel> notesModelArrayList, Context context) {
         this.notesModelArrayList = notesModelArrayList;
         this.context = context;
@@ -45,10 +52,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     }
 
     @Override
-    public void onBindViewHolder(NotesViewHolder holder, int position) {
-        NotesModel thisNote = notesModelArrayList.get(position);
+    public void onBindViewHolder(NotesViewHolder holder, final int position) {
+        final NotesModel thisNote = notesModelArrayList.get(position);
         holder.tvNote.setText(thisNote.getNote());
         holder.tvTimeStamp.setText(thisNote.getCreatedAt());
+        holder.noteCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, NoteEditActvity.class);
+                i.putExtra(Constants.NOTES_EDIT_TEXT, thisNote.getNote());
+                i.putExtra(Constants.NOTES_EDIT_POSITION,position);
+                ((Activity)context).startActivityForResult(i,Constants.NOTES_RESULT);
+            }
+        });
     }
 
     @Override
