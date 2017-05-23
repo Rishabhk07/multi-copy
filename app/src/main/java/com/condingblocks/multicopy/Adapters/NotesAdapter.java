@@ -1,6 +1,7 @@
 package com.condingblocks.multicopy.Adapters;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -8,6 +9,7 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,7 +54,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     }
 
     @Override
-    public void onBindViewHolder(NotesViewHolder holder, final int position) {
+    public void onBindViewHolder(final NotesViewHolder holder, final int position) {
         final NotesModel thisNote = notesModelArrayList.get(position);
         holder.tvNote.setText(thisNote.getNote());
         holder.tvTimeStamp.setText(thisNote.getCreatedAt());
@@ -62,6 +64,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 Intent i = new Intent(context, NoteEditActvity.class);
                 i.putExtra(Constants.NOTES_EDIT_TEXT, thisNote.getNote());
                 i.putExtra(Constants.NOTES_EDIT_POSITION,position);
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation((Activity) context, Pair.create((View)holder.tvNote,"notes_text"));
                 ((Activity)context).startActivityForResult(i,Constants.NOTES_RESULT);
             }
         });

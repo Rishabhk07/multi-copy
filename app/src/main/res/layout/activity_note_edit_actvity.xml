@@ -18,5 +18,6 @@
         android:hint="Note"
         android:gravity="start"
         android:backgroundTint="@android:color/transparent"
+        android:transitionName="notes_text"
         />
 </RelativeLayout>

@@ -27,6 +27,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:maxLines="3"
         android:textColor="#454545"
+        android:transitionName="notes_text"
         />
 
     <TextView
