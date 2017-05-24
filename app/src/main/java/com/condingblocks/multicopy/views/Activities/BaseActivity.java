@@ -179,6 +179,15 @@ public class BaseActivity extends AppCompatActivity {
                 notesFragment.onNotesEdit(text,position);
             }
         }
+        if(resultCode == Constants.NEW_NOTE_ACTIVTY_KEY){
+            Log.d(TAG, "onActivityResult: without null check");
+            if (data != null){
+                String text = data.getStringExtra(Constants.ACTIVITY_NEW_NOTE_TEXT);
+                String createdAt = data.getStringExtra(Constants.ACTIVITY_NEW_NOTE_CREATED);
+                Log.d(TAG, "onActivityResult: with null check" + text + " " + createdAt );
+                notesFragment.onNewNote(text,createdAt);
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

@@ -3,6 +3,7 @@ package com.condingblocks.multicopy.views.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +14,14 @@ import android.view.ViewGroup;
 
 
 import com.condingblocks.multicopy.Adapters.NotesAdapter;
+import com.condingblocks.multicopy.Interfaces.onNewNote;
 import com.condingblocks.multicopy.Interfaces.onNotesEdit;
 import com.condingblocks.multicopy.R;
 
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.model.NotesModel;
+import com.condingblocks.multicopy.views.Activities.NewNoteActivity;
+import com.condingblocks.multicopy.views.Activities.NoteEditActvity;
 
 import java.util.ArrayList;
 
@@ -28,10 +32,11 @@ import io.realm.RealmResults;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotesFragment extends Fragment implements onNotesEdit {
+public class NotesFragment extends Fragment implements onNotesEdit,onNewNote {
 
     RecyclerView recyclerView;
     NotesAdapter notesAdapter;
+    FloatingActionButton fabNewNote;
     ArrayList<NotesModel> notesList = new ArrayList<>();
     public static final String TAG = "NotesFragment";
     public NotesFragment() {
@@ -43,6 +48,7 @@ public class NotesFragment extends Fragment implements onNotesEdit {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.fragment_notes, container, false);
+        fabNewNote = (FloatingActionButton) root.findViewById(R.id.fabNewNote);
         recyclerView = (RecyclerView) root.findViewById(R.id.rvNotesList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         notesList = new ArrayList<>();
@@ -50,6 +56,13 @@ public class NotesFragment extends Fragment implements onNotesEdit {
         notesAdapter = new NotesAdapter(notesList,getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(notesAdapter);
+        fabNewNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),NewNoteActivity.class);
+                startActivityForResult(i,Constants.NEW_NOTE_ACTIVTY_KEY);
+            }
+        });
         refreshData();
         return root;
     }
@@ -88,5 +101,16 @@ public class NotesFragment extends Fragment implements onNotesEdit {
         notesAdapter.notifyItemChanged(position);
         realm.copyToRealm(notesList.get(position));
         realm.commitTransaction();
+    }
+
+    @Override
+    public void onNewNote(String note,String createdAt) {
+        Log.d(TAG, "onNewNote: " + note  +  " " + createdAt);
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        notesList.add(new NotesModel(note,createdAt));
+        realm.copyToRealmOrUpdate(notesList);
+        realm.commitTransaction();
+        notesAdapter.notifyDataSetChanged();
     }
 }

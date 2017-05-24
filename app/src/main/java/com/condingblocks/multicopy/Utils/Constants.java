@@ -21,6 +21,12 @@ public class Constants {
     public static final String ACTIVITY_RESULT_TEXT = "result";
     //activity result int
     public static final String ACTIVITY_RESULT_POSITION = "000";
+    //
+    public static final String ACTIVITY_NEW_NOTE_TEXT = "newNote";
+    //
+    public static final String ACTIVITY_NEW_NOTE_CREATED = "newNoteCreatedAt";
+    //
+    public static final int NEW_NOTE_ACTIVTY_KEY = 4545;
 
 
 }

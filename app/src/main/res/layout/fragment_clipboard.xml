@@ -11,4 +11,5 @@
         android:id="@+id/rvClipboardList">
     </android.support.v7.widget.RecyclerView>
 
+
 </FrameLayout>

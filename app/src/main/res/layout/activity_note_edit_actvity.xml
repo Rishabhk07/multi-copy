@@ -17,7 +17,6 @@
         android:titleTextColor="@android:color/white"
         app:theme="@style/ToolbarStyle"
         />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,12 +25,10 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="Rishabh Khanna"
-        android:hint="Note"
+        android:hint="New Note"
         android:gravity="start"
         android:backgroundTint="@android:color/transparent"
         android:transitionName="notes_text"
         android:layout_below="@id/my_toolbar"
-
         />
 </RelativeLayout>
