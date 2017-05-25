@@ -170,7 +170,6 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         }else if(!hasCheckedItems && actionMode != null){
             //there are no items selected finish the action mode
             actionMode.finish();
-            actionMode = null;
         }
         if(actionMode != null)
             actionMode.setTitle(String.valueOf(notesAdapter.getSelectedCount()) + " selected");
