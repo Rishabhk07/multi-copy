@@ -14,6 +14,8 @@ import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 /**
  * Created by rishabhkhanna on 25/05/17.
  */

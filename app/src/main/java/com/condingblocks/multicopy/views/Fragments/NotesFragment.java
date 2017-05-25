@@ -111,8 +111,8 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         notesList.get(position).setNote(notes);
-        notesAdapter.notifyItemChanged(position);
         realm.copyToRealm(notesList.get(position));
+        notesAdapter.notifyItemChanged(position);
         realm.commitTransaction();
     }
 
@@ -125,6 +125,19 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         realm.copyToRealmOrUpdate(notesList);
         realm.commitTransaction();
         notesAdapter.notifyDataSetChanged();
+    }
+
+    //deletefrom Notes List
+    public void deleteFromNoteRealm(final int position){
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                NotesModel thisNote = notesList.get(position);
+                thisNote.deleteFromRealm();
+            }
+        });
+        notesList.remove(position);
     }
 
     //Implement long item clicked and on long item clicked
@@ -178,7 +191,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         for (int i = 0 ;i < selected.size() ; i++){
             if (selected.valueAt(i)){
                 //If the current id is selected remove the item via key
-                notesList.remove(selected.keyAt(i));
+                deleteFromNoteRealm(selected.keyAt(i));
                 notesAdapter.notifyDataSetChanged();
              }
         }

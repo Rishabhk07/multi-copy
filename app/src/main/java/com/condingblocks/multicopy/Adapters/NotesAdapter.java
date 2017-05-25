@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import io.realm.RealmResults;
+
 /**
  * Created by rishabhkhanna on 14/05/17.
  */
@@ -64,7 +66,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 ((Activity)context).startActivityForResult(i,Constants.NOTES_RESULT);
             }
         });
-        holder.itemView.setBackgroundColor(mSelectedItems.get(position)?0x9934B5E4: Color.TRANSPARENT);
+        holder.itemView.setBackgroundColor(mSelectedItems.get(position)? 0x9934B5E4: Color.TRANSPARENT);
     }
 
     @Override
@@ -87,6 +89,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             selectedOverlay = itemView.findViewById(R.id.selected_overlay);
 
         }
+    }
+
+    //delete items from notes function
+    public void delteNotes(){
+
     }
 
 
@@ -117,6 +124,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     public SparseBooleanArray getmSelectedItems(){
         return mSelectedItems;
     }
+
 
 
 
