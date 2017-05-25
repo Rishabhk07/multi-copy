@@ -13,7 +13,10 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_white_18dp"
         android:layout_gravity="end|bottom"
-        android:layout_margin="12dp"
-        android:id="@+id/fabNewNote"/>
+        android:layout_margin="16dp"
+        android:id="@+id/fabNewNote"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:background="@color/colorPrimaryDark"
+        />
 
 </FrameLayout>

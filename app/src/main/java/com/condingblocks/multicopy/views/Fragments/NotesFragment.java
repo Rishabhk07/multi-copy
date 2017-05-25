@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
@@ -188,7 +189,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         SparseBooleanArray selected = notesAdapter.getmSelectedItems();
 
         //loop through selected items
-        for (int i = 0 ;i < selected.size() ; i++){
+        for (int i = (selected.size()-1) ;i >=0 ; i--){
             if (selected.valueAt(i)){
                 //If the current id is selected remove the item via key
                 deleteFromNoteRealm(selected.keyAt(i));
@@ -196,8 +197,11 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
              }
         }
 
-        Toast.makeText(getContext(), selected.size() + " items deleted", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), selected.size() + " items deleted", Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(recyclerView,selected.size() + " Notes deleted",Snackbar.LENGTH_SHORT);
+        snackbar.show();
         actionMode.finish();
+
     }
 
 }

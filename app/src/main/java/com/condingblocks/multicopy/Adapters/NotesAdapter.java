@@ -66,7 +66,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 ((Activity)context).startActivityForResult(i,Constants.NOTES_RESULT);
             }
         });
-        holder.itemView.setBackgroundColor(mSelectedItems.get(position)? 0x9934B5E4: Color.TRANSPARENT);
+        holder.itemView.setBackgroundColor(mSelectedItems.get(position)? context.getResources().getColor(R.color.ColorPrimaryLight): Color.TRANSPARENT);
     }
 
     @Override
