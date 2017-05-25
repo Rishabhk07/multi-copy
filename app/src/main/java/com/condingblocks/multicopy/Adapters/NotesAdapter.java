@@ -4,17 +4,12 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ActionMode;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,7 +21,6 @@ import com.condingblocks.multicopy.views.Activities.NoteEditActvity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by rishabhkhanna on 14/05/17.
@@ -35,14 +29,16 @@ import java.util.List;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder>{
     public ArrayList<NotesModel> notesModelArrayList;
     private Context context;
-    private SparseBooleanArray selectionItems;
-    public ArrayList<NotesModel> selected_userLists = new ArrayList<>();
+    //contexttual  Action Bar
+    private SparseBooleanArray mSelectedItems;
+
 
     Gson gson = new Gson();
     public static final String TAG = "NotesAdapter";
     public NotesAdapter(ArrayList<NotesModel> notesModelArrayList, Context context) {
         this.notesModelArrayList = notesModelArrayList;
         this.context = context;
+        mSelectedItems = new SparseBooleanArray();
     }
 
     @Override
@@ -68,6 +64,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 ((Activity)context).startActivityForResult(i,Constants.NOTES_RESULT);
             }
         });
+        holder.itemView.setBackgroundColor(mSelectedItems.get(position)?0x9934B5E4: Color.TRANSPARENT);
     }
 
     @Override
@@ -80,12 +77,47 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         TextView tvNote;
         TextView tvTimeStamp;
         CardView noteCardView;
+        View selectedOverlay;
+
         public NotesViewHolder(View itemView) {
             super(itemView);
             tvNote = (TextView) itemView.findViewById(R.id.tvNoteText);
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvCreatedAt);
             noteCardView = (CardView) itemView.findViewById(R.id.notesCardView);
+            selectedOverlay = itemView.findViewById(R.id.selected_overlay);
+
         }
     }
+
+
+
+    //methods required to do selections in android
+    //toggle state from selected or deselected
+    public void toggleSelection(int position){
+        selectView(position,!mSelectedItems.get(position));
+    }
+    //remove selected items
+    public void removeSelection(){
+        mSelectedItems = new SparseBooleanArray();
+        notifyDataSetChanged();
+    }
+    //
+    public void selectView(int position,boolean value){
+        if (value)
+            mSelectedItems.put(position,value);
+        else
+            mSelectedItems.delete(position);
+        notifyDataSetChanged();
+    }
+    //get total selected items
+    public int getSelectedCount(){
+        return mSelectedItems.size();
+    }
+    //return all selected ids
+    public SparseBooleanArray getmSelectedItems(){
+        return mSelectedItems;
+    }
+
+
 
 }

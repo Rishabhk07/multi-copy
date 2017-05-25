@@ -11,7 +11,9 @@
         android:layout_marginRight="4dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:id="@+id/notesCardView">
+        android:id="@+id/notesCardView"
+        android:foreground="?selectableItemBackground"
+        android:clickable="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

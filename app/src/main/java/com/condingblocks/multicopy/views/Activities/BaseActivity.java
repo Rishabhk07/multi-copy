@@ -190,4 +190,8 @@ public class BaseActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    public NotesFragment getRecyclerViewFragment(){
+        return notesFragment;
+    }
 }

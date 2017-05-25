@@ -2,26 +2,36 @@ package com.condingblocks.multicopy.views.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.condingblocks.multicopy.Adapters.NotesAdapter;
+import com.condingblocks.multicopy.Interfaces.RecyclerClick_Listener;
 import com.condingblocks.multicopy.Interfaces.onNewNote;
 import com.condingblocks.multicopy.Interfaces.onNotesEdit;
 import com.condingblocks.multicopy.R;
 
 import com.condingblocks.multicopy.Utils.Constants;
+import com.condingblocks.multicopy.Utils.RecyclerTouchListener;
+import com.condingblocks.multicopy.Utils.Toolbar_ActionMode_Callback;
 import com.condingblocks.multicopy.model.NotesModel;
 import com.condingblocks.multicopy.views.Activities.NewNoteActivity;
-import com.condingblocks.multicopy.views.Activities.NoteEditActvity;
 
 import java.util.ArrayList;
 
@@ -32,11 +42,12 @@ import io.realm.RealmResults;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotesFragment extends Fragment implements onNotesEdit,onNewNote {
+public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
 
     RecyclerView recyclerView;
     NotesAdapter notesAdapter;
     FloatingActionButton fabNewNote;
+    ActionMode actionMode;
     ArrayList<NotesModel> notesList = new ArrayList<>();
     public static final String TAG = "NotesFragment";
     public NotesFragment() {
@@ -56,6 +67,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote {
         notesAdapter = new NotesAdapter(notesList,getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(notesAdapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         fabNewNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +76,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote {
             }
         });
         refreshData();
+        implementREcyclerViewClickListener();
         return root;
     }
 
@@ -113,4 +126,65 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote {
         realm.commitTransaction();
         notesAdapter.notifyDataSetChanged();
     }
+
+    //Implement long item clicked and on long item clicked
+    public void implementREcyclerViewClickListener(){
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new RecyclerClick_Listener() {
+            @Override
+            public void onClick(View view, int position) {
+                    if(actionMode != null ){
+                        onListItemSelect(position);
+                    }
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                onListItemSelect(position);
+
+            }
+        }));
+    }
+
+    //ListItem select method
+    private void onListItemSelect(int position){
+        notesAdapter.toggleSelection(position);
+        boolean hasCheckedItems = notesAdapter.getSelectedCount() > 0 ; //check if any items are already selected
+
+        if(hasCheckedItems && actionMode == null){
+            //there are some items selected start the action mode
+            actionMode = ((AppCompatActivity)getActivity()).startSupportActionMode(new Toolbar_ActionMode_Callback(getActivity(),notesAdapter,notesList,this));
+        }else if(!hasCheckedItems && actionMode != null){
+            //there are no items selected finish the action mode
+            actionMode.finish();
+            actionMode = null;
+        }
+        if(actionMode != null)
+            actionMode.setTitle(String.valueOf(notesAdapter.getSelectedCount()) + " selected");
+    }
+
+    //set Action mode null after use
+    public void setNullToActionMode(){
+        if (actionMode != null){
+            actionMode = null;
+        }
+    }
+
+    //Delete selected rows
+    public void deleteRows(){
+        //get Selected items
+        SparseBooleanArray selected = notesAdapter.getmSelectedItems();
+
+        //loop through selected items
+        for (int i = 0 ;i < selected.size() ; i++){
+            if (selected.valueAt(i)){
+                //If the current id is selected remove the item via key
+                notesList.remove(selected.keyAt(i));
+                notesAdapter.notifyDataSetChanged();
+             }
+        }
+
+        Toast.makeText(getContext(), selected.size() + " items deleted", Toast.LENGTH_SHORT).show();
+        actionMode.finish();
+    }
+
 }
