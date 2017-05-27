@@ -29,6 +29,8 @@ import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.views.Fragments.ClipboardFragment;
 import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 
 public class BaseActivity extends AppCompatActivity {
@@ -53,6 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_base);
         Realm.init(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

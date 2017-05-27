@@ -20,7 +20,6 @@
         <activity android:name=".views.TryActivity" />
         <activity
             android:name=".views.Activities.BaseActivity"
-            android:label="@string/title_activity_base"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,6 +43,9 @@
 
         <activity android:name=".views.Activities.NoteEditActvity" />
         <activity android:name=".views.Activities.NewNoteActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="658284e411bf6dd78736577db09381b9352bc92c" />
     </application>
 
 </manifest>
