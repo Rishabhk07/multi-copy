@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen4">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="@dimen/desc_padding"
+                android:paddingRight="@dimen/desc_padding"
+                android:text="Copy texts together even from whatsapp messages where copy cut paste menu is not available by Enabling Smart Copy."
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="@dimen/desc_padding"
+                android:paddingRight="@dimen/desc_padding"
+                android:text="smart copy enhances the regular copy to copy multiple text together. Dont Forget to disable it after use"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                />
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:src="@drawable/screenshot_smart_copy"
+            android:layout_height="350dp"
+            android:layout_gravity="bottom"
+            android:paddingBottom="@dimen/dots_margin_bottom"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="350dp"
+            android:src="@drawable/smart_copy_whatsapp"
+            android:layout_gravity="bottom"
+            android:paddingBottom="@dimen/dots_margin_bottom"
+            android:layout_marginTop="20dp"
+            />
+    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

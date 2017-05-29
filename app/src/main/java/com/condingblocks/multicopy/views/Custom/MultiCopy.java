@@ -165,7 +165,7 @@ public class MultiCopy extends View {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(copyDataAdapter);
         AdRequest adRequest = new AdRequest.Builder().build();
-//        adView.loadAd(adRequest);
+        adView.loadAd(adRequest);
 
         return view;
     }
@@ -178,7 +178,7 @@ public class MultiCopy extends View {
     }
 
     public void checkSmartCopy(){
-        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false) && checkServiceRunning();
+        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
         Log.d(TAG, "checkSmartCopy: " + checkServiceRunning());
         if(copyToggle){
             tvsmartCopy.setText("Enable\nSmart Copy");

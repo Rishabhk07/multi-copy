@@ -21,11 +21,6 @@
         <activity
             android:name=".views.Activities.BaseActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".views.Activities.TextCallActivity"
@@ -36,12 +31,20 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
         <activity android:name=".views.Activities.NoteEditActvity" />
-        <activity android:name=".views.Activities.NewNoteActivity"></activity>
+        <activity android:name=".views.Activities.NewNoteActivity" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="658284e411bf6dd78736577db09381b9352bc92c" />
+
+        <activity android:name=".views.Activities.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
