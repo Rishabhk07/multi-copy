@@ -37,10 +37,6 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".Services.MyIntentService"
-            android:exported="false" />
-
         <activity android:name=".views.Activities.NoteEditActvity" />
         <activity android:name=".views.Activities.NewNoteActivity"></activity>
         <meta-data

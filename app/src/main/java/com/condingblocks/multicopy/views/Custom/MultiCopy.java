@@ -1,5 +1,6 @@
 package com.condingblocks.multicopy.views.Custom;
 
+import android.app.ActivityManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 import com.condingblocks.multicopy.Adapters.CopyDataAdapter;
 import com.condingblocks.multicopy.Interfaces.RemoveCallback;
 import com.condingblocks.multicopy.R;
-import com.condingblocks.multicopy.Services.MyIntentService;
+
 import com.condingblocks.multicopy.Services.TextCaptureService;
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.Serializer;
@@ -177,12 +178,22 @@ public class MultiCopy extends View {
     }
 
     public void checkSmartCopy(){
-        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
+        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false) && checkServiceRunning();
+        Log.d(TAG, "checkSmartCopy: " + checkServiceRunning());
         if(copyToggle){
             tvsmartCopy.setText("Enable\nSmart Copy");
         }else{
             tvsmartCopy.setText("Disable\nSmart Copy");
         }
+    }
+
+    public boolean checkServiceRunning(){
+        Boolean check = false;
+            ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+            for(ActivityManager.RunningServiceInfo service : activityManager.getRunningServices(Integer.MAX_VALUE)) {
+                Log.d(TAG, "checkServiceRunning: " + service.service.getPackageName());
+            }
+        return check;
     }
 
 

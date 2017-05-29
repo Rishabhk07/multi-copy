@@ -5,6 +5,7 @@ import android.app.Presentation;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 
 import com.condingblocks.multicopy.R;
@@ -60,18 +62,25 @@ public class TextCaptureService extends Service {
                     if(toggleService) {
                         Log.d(TAG, "onPrimaryClipChanged: ");
                         final ClipData clipData = clipboardManager.getPrimaryClip();
-                        ClipData.Item item = clipData.getItemAt(0);
-                        String thisText = item.getText().toString();
-                        String sb = "";
-                        copiedDataArray.add(thisText);
-                        for (String text : copiedDataArray) {
-                            sb += text + "\n";
-                        }
+                        if (clipData.getDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
+                                || clipData.getDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_HTML)
+                                || clipData.getDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_INTENT)) {
+                            ClipData.Item item = clipData.getItemAt(0);
+                            String thisText = item.getText().toString();
+                            String sb = "";
+                            copiedDataArray.add(thisText);
+                            for (String text : copiedDataArray) {
+                                sb += text + "\n";
+                            }
 
-                        ClipData copiedClip = ClipData.newPlainText("copiedClip", sb);
-                        clipboardManager.removePrimaryClipChangedListener(this);
-                        clipboardManager.setPrimaryClip(copiedClip);
-                        clipboardManager.addPrimaryClipChangedListener(this);
+                            ClipData copiedClip = ClipData.newPlainText("copiedClip", sb);
+                            clipboardManager.removePrimaryClipChangedListener(this);
+                            clipboardManager.setPrimaryClip(copiedClip);
+                            clipboardManager.addPrimaryClipChangedListener(this);
+                            Toast.makeText(TextCaptureService.this, "Multi Copied", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(TextCaptureService.this, "only text is allowed", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
