@@ -24,7 +24,9 @@ import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.Serializer;
 import com.condingblocks.multicopy.model.ClipboardTextModel;
 import com.condingblocks.multicopy.model.NotesModel;
+import com.condingblocks.multicopy.views.Activities.BaseActivity;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.text.DateFormat;
@@ -42,7 +44,7 @@ import io.realm.RealmResults;
 public class MultiCopy extends View {
     private Context mContext;
     private View view;
-    private NativeExpressAdView adView;
+    private AdView adView;
     RecyclerView recyclerView;
     TextView tvJustCopied;
     ImageView imClear;
@@ -52,6 +54,7 @@ public class MultiCopy extends View {
     ArrayList<String> list;
     CopyDataAdapter copyDataAdapter;
     LinearLayoutManager linearLayoutManager;
+    ImageView settingIV;
     boolean smartCopyToggle = false;
     TextView tvsmartCopy;
     ClipboardManager clipboardManager;
@@ -68,7 +71,7 @@ public class MultiCopy extends View {
         LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         clipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
         view = li.inflate(R.layout.dialog_layout, null);
-        adView = (NativeExpressAdView) view.findViewById(R.id.adView);
+        adView = (AdView) view.findViewById(R.id.adView);
         recyclerView = (RecyclerView) view.findViewById(R.id.rvList);
         tvJustCopied = (TextView) view.findViewById(R.id.multicopy);
         imClear = (ImageView) view.findViewById(R.id.ivClear);
@@ -76,6 +79,7 @@ public class MultiCopy extends View {
         flSaveNotes = (FrameLayout) view.findViewById(R.id.flTakeNotes);
         flSmartCopy = (FrameLayout) view.findViewById(R.id.flSmartCopy);
         tvsmartCopy = (TextView) view.findViewById(R.id.tvSmartCopy);
+        settingIV = (ImageView) view.findViewById(R.id.IVsetting);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         checkSmartCopy();
         Realm.init(mContext);
@@ -142,6 +146,14 @@ public class MultiCopy extends View {
             }
         });
 
+        settingIV.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mContext, BaseActivity.class);
+                mContext.startActivity(i);
+            }
+        });
+
         tvJustCopied.setText(copiedText);
 
         list = thisText.getTextArrayList();
@@ -151,10 +163,9 @@ public class MultiCopy extends View {
         linearLayoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(copyDataAdapter);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("YOUR_DEVICE_ID")
-                .build();
-        adView.loadAd(adRequest);
+        AdRequest adRequest = new AdRequest.Builder().build();
+//        adView.loadAd(adRequest);
+
         return view;
     }
 

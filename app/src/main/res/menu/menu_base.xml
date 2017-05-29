@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.condingblocks.multicopy.views.Activities.BaseActivity">
     <item
-        android:icon="@drawable/ic_settings_white_24dp"
-        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_dashboard_white_24dp"
+        android:id="@+id/action_intro"
         android:title="@string/action_settings"
         app:showAsAction="always"/>
 </menu>
