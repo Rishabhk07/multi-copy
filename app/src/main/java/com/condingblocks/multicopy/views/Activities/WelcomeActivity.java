@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.condingblocks.multicopy.Adapters.ViewPagerAdapter;
 import com.condingblocks.multicopy.R;
+import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.PrefsManager;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -33,9 +34,13 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         prefsManager = new PrefsManager(this);
+        Intent i = getIntent();
+        int fromBase = i.getIntExtra(Constants.BASE_TO_WELCOME,0);
         if (!prefsManager.isFirstTimeLaunch()) {
-//            launchHomeScreen();
-//            finish();
+            if(fromBase != 777) {
+            launchHomeScreen();
+            finish();
+            }
         }
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         viewPager = (ViewPager) findViewById(R.id.introViewpager);

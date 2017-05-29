@@ -18,7 +18,7 @@
             android:layout_marginTop="40dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="Access all your notes and current multi copy clipboard from the app. Make new notes and delte old ones here"
+            android:text="Access all your notes and current multi copy clipboard from the app. Make new notes and delete old ones here"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"

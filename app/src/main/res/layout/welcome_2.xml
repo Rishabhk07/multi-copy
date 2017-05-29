@@ -13,7 +13,7 @@
             android:layout_marginTop="40dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="All your copied texts will be shown in dialog together and when you after multi copy all the text shown will be pasted together. "
+            android:text="All your copied texts will be shown in a dialog together and after you multi copy, all the text shown will be pasted together. "
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"

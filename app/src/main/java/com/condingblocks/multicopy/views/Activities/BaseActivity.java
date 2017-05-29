@@ -94,7 +94,9 @@ public class BaseActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_intro) {
-
+        Intent i = new Intent(this,WelcomeActivity.class);
+            i.putExtra(Constants.BASE_TO_WELCOME,777);
+            startActivity(i);
             return true;
         }
 

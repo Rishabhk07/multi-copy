@@ -17,7 +17,7 @@
             android:layout_marginTop="40dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="Access Multi Copy anywhere in your mobile from copy cut paste menu and select Multi Copy to copy multiple texts together."
+            android:text="Access Multi Copy anywhere in your mobile from cut copy paste menu and select Multi Copy to copy multiple texts together."
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
