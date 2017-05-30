@@ -1,13 +1,16 @@
 
 language: android
+sudo: required
+jdk: oraclejdk8
 android:
         components:
                 - platform-tools
                 - build-tools-23.0.1
                 - android-23
                 - extra-android-m2repository
+                - extra-google-m2repository
 script:
-        - ./gradlew clean build -i --continue
+        - "./gradlew clean build connectedCheck -PdisablePreDex --stacktrace"
 before_install:
         - chmod +x gradlew
 branches:
