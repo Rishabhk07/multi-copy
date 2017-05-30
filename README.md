@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Rishabhk07/multi-copy.svg?branch=master)](https://travis-ci.org/Rishabhk07/multi-copy)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/619807ae07e0438bb6fbff2d08c9cba8)](https://www.codacy.com/app/Rishabhk07/multi-copy?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rishabhk07/multi-copy&amp;utm_campaign=Badge_Grade)
 # Multi Copy
 An Android app to copy multiple texts together
 App gives an option "Multi Copy" in the context menu to copy multiple texts, when you paste after multi copy option all the copied text will be pasted.
