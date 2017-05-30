@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/619807ae07e0438bb6fbff2d08c9cba8)](https://www.codacy.com/app/Rishabhk07/multi-copy?utm_source=github.com&utm_medium=referral&utm_content=Rishabhk07/multi-copy&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/Rishabhk07/multi-copy.svg?branch=master)](https://travis-ci.org/Rishabhk07/multi-copy)
 # Multi Copy
 An Android app to copy multiple texts together
