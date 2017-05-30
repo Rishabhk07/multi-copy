@@ -9,8 +9,7 @@ smart copy can also be enabled which will enhance the regular copy function to c
 
 # Screenshots
 
-![](https://github.com/Rishabhk07/multi-copy/blob/master/screenshots/smaller%20pics/screenshot_showtext.png)
-![](https://github.com/Rishabhk07/multi-copy/blob/master/screenshots/smaller%20pics/screenshot_new_clip.png)
-![](https://github.com/Rishabhk07/multi-copy/blob/master/screenshots/smaller%20pics/screenshot_notes.png)
+![](https://github.com/Rishabhk07/multi-copy/blob/master/screenshots/rsz_screenshot_showtext.png)
+![](https://github.com/Rishabhk07/multi-copy/blob/master/screenshots/smaller%20pics/rsz_1screenshots_notes.png)
 
 
