@@ -104,7 +104,7 @@ public class MultiCopy extends View {
                 }else{
                     //smart copy is off
                     smartCopyToggle = true;
-                    if(custom_LOG)
+
                     Log.d(TAG, "onClick: false");
                     mContext.stopService(i);
                 }
@@ -184,7 +184,7 @@ public class MultiCopy extends View {
     }
 
     public void checkSmartCopy(){
-        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
+        boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,true);
         if(custom_LOG)
         Log.d(TAG, "checkSmartCopy: " + checkServiceRunning());
         if(copyToggle){
@@ -204,7 +204,6 @@ public class MultiCopy extends View {
         return check;
     }
 
-    contex
 
 
 }
