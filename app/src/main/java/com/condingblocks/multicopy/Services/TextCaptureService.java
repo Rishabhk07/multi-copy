@@ -1,36 +1,14 @@
 package com.condingblocks.multicopy.Services;
 
-import android.app.Dialog;
-import android.app.Presentation;
+
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.PixelFormat;
-import android.os.Build;
 import android.os.IBinder;
-
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
-
-
-import com.condingblocks.multicopy.R;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TextCaptureService extends Service {

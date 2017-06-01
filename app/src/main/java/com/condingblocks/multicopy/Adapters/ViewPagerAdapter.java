@@ -5,10 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
-import com.condingblocks.multicopy.R;
-import com.condingblocks.multicopy.views.Activities.BaseActivity;
 
 /**
  * Created by rishabhkhanna on 30/05/17.

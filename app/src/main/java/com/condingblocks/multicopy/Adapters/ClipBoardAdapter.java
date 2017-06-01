@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
-import com.condingblocks.multicopy.model.ClipboardTextModel;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

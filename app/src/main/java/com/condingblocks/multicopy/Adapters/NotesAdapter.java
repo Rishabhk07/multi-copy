@@ -22,8 +22,6 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-import io.realm.RealmResults;
-
 /**
  * Created by rishabhkhanna on 14/05/17.
  */

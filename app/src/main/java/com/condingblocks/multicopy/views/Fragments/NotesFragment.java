@@ -2,7 +2,6 @@ package com.condingblocks.multicopy.views.Fragments;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,27 +14,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-
 import com.condingblocks.multicopy.Adapters.NotesAdapter;
 import com.condingblocks.multicopy.Interfaces.RecyclerClick_Listener;
 import com.condingblocks.multicopy.Interfaces.onNewNote;
 import com.condingblocks.multicopy.Interfaces.onNotesEdit;
 import com.condingblocks.multicopy.R;
-
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.Utils.RecyclerTouchListener;
 import com.condingblocks.multicopy.Utils.Toolbar_ActionMode_Callback;
 import com.condingblocks.multicopy.model.NotesModel;
 import com.condingblocks.multicopy.views.Activities.NewNoteActivity;
-
 import java.util.ArrayList;
-
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -202,7 +193,12 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         }
 
 //        Toast.makeText(getContext(), selected.size() + " items deleted", Toast.LENGTH_SHORT).show();
-        Snackbar snackbar = Snackbar.make(recyclerView,selected.size() + " Notes deleted",Snackbar.LENGTH_SHORT);
+        int deleteSize = selected.size();
+        String deletedText = " Notes deleted";
+        if(deleteSize == 1){
+            deletedText = " Note deleted";
+        }
+        Snackbar snackbar = Snackbar.make(recyclerView,selected.size() + deletedText,Snackbar.LENGTH_SHORT);
         snackbar.show();
         actionMode.finish();
 

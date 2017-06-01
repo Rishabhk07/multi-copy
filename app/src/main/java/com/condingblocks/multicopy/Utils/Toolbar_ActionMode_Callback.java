@@ -1,7 +1,6 @@
 package com.condingblocks.multicopy.Utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +8,6 @@ import android.view.MenuItem;
 import com.condingblocks.multicopy.Adapters.NotesAdapter;
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.model.NotesModel;
-import com.condingblocks.multicopy.views.Activities.BaseActivity;
 import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
 import java.util.ArrayList;

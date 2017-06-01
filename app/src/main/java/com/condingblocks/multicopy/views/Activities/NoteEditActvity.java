@@ -1,9 +1,7 @@
 package com.condingblocks.multicopy.views.Activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.widget.EditText;
 
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Constants;
-import com.condingblocks.multicopy.model.NotesModel;
 import com.google.gson.Gson;
 
 public class NoteEditActvity extends AppCompatActivity {

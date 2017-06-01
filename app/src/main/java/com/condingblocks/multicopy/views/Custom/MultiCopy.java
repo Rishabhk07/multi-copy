@@ -28,15 +28,12 @@ import com.condingblocks.multicopy.model.NotesModel;
 import com.condingblocks.multicopy.views.Activities.BaseActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.NativeExpressAdView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import io.realm.Realm;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
 
 /**
  * Created by rishabhkhanna on 08/05/17.

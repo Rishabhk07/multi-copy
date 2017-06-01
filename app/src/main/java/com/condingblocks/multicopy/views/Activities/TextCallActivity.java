@@ -1,7 +1,6 @@
 package com.condingblocks.multicopy.views.Activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +13,6 @@ import com.condingblocks.multicopy.Utils.Serializer;
 import com.condingblocks.multicopy.views.Custom.MultiCopy;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class TextCallActivity extends AppCompatActivity {
     public static final String TAG = "TextCallActivity";

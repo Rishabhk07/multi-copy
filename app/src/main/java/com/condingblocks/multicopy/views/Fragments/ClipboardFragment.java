@@ -26,6 +26,7 @@ public class ClipboardFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     ClipBoardAdapter clipBoardAdapter;
     ArrayList<String> clipArray;
+    public static boolean clipboardLog = false;
     public static final String TAG = "ClipBoardFragment";
     public ClipboardFragment() {
         // Required empty public constructor
@@ -35,6 +36,7 @@ public class ClipboardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(clipboardLog)
         Log.d(TAG, "onResume: in clipboard fragment");
         refreshData();
     }

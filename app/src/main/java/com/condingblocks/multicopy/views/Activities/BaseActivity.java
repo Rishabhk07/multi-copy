@@ -2,14 +2,9 @@ package com.condingblocks.multicopy.views.Activities;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,16 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.condingblocks.multicopy.R;
 import com.condingblocks.multicopy.Utils.Constants;
 import com.condingblocks.multicopy.views.Fragments.ClipboardFragment;
 import com.condingblocks.multicopy.views.Fragments.NotesFragment;
 
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 
@@ -84,8 +77,8 @@ public class BaseActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_intro) {
-        Intent i = new Intent(this,WelcomeActivity.class);
-            i.putExtra(Constants.BASE_TO_WELCOME,777);
+            Intent i = new Intent(this, WelcomeActivity.class);
+            i.putExtra(Constants.BASE_TO_WELCOME, 777);
             startActivity(i);
             return true;
         }
@@ -142,12 +135,12 @@ public class BaseActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            switch (position){
+            switch (position) {
                 case 0:
-                            return notesFragment;
+                    return notesFragment;
                 case 1:
                     ClipboardFragment clipboardFragment = new ClipboardFragment();
-                            return clipboardFragment;
+                    return clipboardFragment;
             }
             return PlaceholderFragment.newInstance(position + 1);
         }
@@ -172,32 +165,32 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(RELEASE_LOG) {
+        if (RELEASE_LOG) {
             Log.d(TAG, "onActivityResult: ");
         }
-        if(requestCode == Constants.NOTES_RESULT){
+        if (requestCode == Constants.NOTES_RESULT) {
 
-            if(data != null){
+            if (data != null) {
                 String text = data.getStringExtra(Constants.ACTIVITY_RESULT_TEXT);
-                int position = data.getIntExtra(Constants.ACTIVITY_RESULT_POSITION,0);
-                notesFragment.onNotesEdit(text,position);
+                int position = data.getIntExtra(Constants.ACTIVITY_RESULT_POSITION, 0);
+                notesFragment.onNotesEdit(text, position);
             }
         }
-        if(resultCode == Constants.NEW_NOTE_ACTIVTY_KEY){
-            if(RELEASE_LOG)
-            Log.d(TAG, "onActivityResult: without null check");
-            if (data != null){
+        if (resultCode == Constants.NEW_NOTE_ACTIVTY_KEY) {
+            if (RELEASE_LOG)
+                Log.d(TAG, "onActivityResult: without null check");
+            if (data != null) {
                 String text = data.getStringExtra(Constants.ACTIVITY_NEW_NOTE_TEXT);
                 String createdAt = data.getStringExtra(Constants.ACTIVITY_NEW_NOTE_CREATED);
                 if (RELEASE_LOG)
-                Log.d(TAG, "onActivityResult: with null check" + text + " " + createdAt );
-                notesFragment.onNewNote(text,createdAt);
+                    Log.d(TAG, "onActivityResult: with null check" + text + " " + createdAt);
+                notesFragment.onNewNote(text, createdAt);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public NotesFragment getRecyclerViewFragment(){
+    public NotesFragment getRecyclerViewFragment() {
         return notesFragment;
     }
 
