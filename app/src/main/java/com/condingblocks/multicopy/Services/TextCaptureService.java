@@ -38,6 +38,7 @@ public class TextCaptureService extends Service {
     static boolean toggleService = false;
     public static final String TAG = "Capture Service";
     ArrayList<String> buffer = new ArrayList<>();
+    public static final boolean textCapture_LOG = false;
     public TextCaptureService() {
     }
 
@@ -50,6 +51,7 @@ public class TextCaptureService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        if (textCapture_LOG)
         Log.d(TAG, "onStartCommand: ");
         toggleService = true;
         final ArrayList<String> copiedDataArray = new ArrayList<>();
@@ -58,8 +60,10 @@ public class TextCaptureService extends Service {
             clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
                 @Override
                 public void onPrimaryClipChanged() {
+                    if (textCapture_LOG)
                     Log.d(TAG, "onPrimaryClipChanged: before changing");
                     if(toggleService) {
+                        if (textCapture_LOG)
                         Log.d(TAG, "onPrimaryClipChanged: ");
                         final ClipData clipData = clipboardManager.getPrimaryClip();
                         if (clipData.getDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -96,6 +100,7 @@ public class TextCaptureService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (textCapture_LOG)
         Log.d(TAG, "onDestroy: ");
         stopSelf();
         toggleService = false;

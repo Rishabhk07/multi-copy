@@ -22,6 +22,7 @@ public class TextCallActivity extends AppCompatActivity {
     View view;
     RemoveCallback removeCallback;
     String thisCopiedText;
+    public static final boolean textCall_LOG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class TextCallActivity extends AppCompatActivity {
         ArrayList<String> copiedArrayList = Serializer.getStringFromSharedPrefs(this).getTextArrayList();
         copiedArrayList.add(thisCopiedText);
         Serializer.setStringToArrayPrefs(TextCallActivity.this, copiedArrayList);
+        if (textCall_LOG)
         Log.d(TAG, "onCreate: TextCallActivty");
         MultiCopy multiCopy = new MultiCopy(this);
         frameLayout = (FrameLayout) findViewById(R.id.activity_text_call);
@@ -43,20 +45,5 @@ public class TextCallActivity extends AppCompatActivity {
         };
         view = multiCopy.addToWindowManager(thisCopiedText, removeCallback);
         frameLayout.addView(view);
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop: ");
-        frameLayout.removeView(view);
-        finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
     }
 }

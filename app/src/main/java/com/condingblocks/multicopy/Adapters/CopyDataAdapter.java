@@ -50,4 +50,5 @@ public class CopyDataAdapter extends RecyclerView.Adapter<CopyDataAdapter.CopyDa
             tvCopyData = (TextView) itemView.findViewById(R.id.tvText);
         }
     }
+
 }

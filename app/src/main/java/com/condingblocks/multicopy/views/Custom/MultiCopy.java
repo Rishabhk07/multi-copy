@@ -61,6 +61,7 @@ public class MultiCopy extends View {
     ClipboardManager clipboardManager;
     SharedPreferences sharedPreferences;
     public static final String TAG = "multi copy view";
+    public static final boolean custom_LOG = false;
 
     public MultiCopy(Context context) {
         super(context);
@@ -96,12 +97,14 @@ public class MultiCopy extends View {
                 if (smartCopyToggle){
                     // smart copy is on
                     smartCopyToggle = false;
+                    if(custom_LOG)
                     Log.d(TAG, "onClick: true");
 
                     mContext.startService(i);
                 }else{
                     //smart copy is off
                     smartCopyToggle = true;
+                    if(custom_LOG)
                     Log.d(TAG, "onClick: false");
                     mContext.stopService(i);
                 }
@@ -109,6 +112,7 @@ public class MultiCopy extends View {
                 if(editor.commit()){
                     checkSmartCopy();
                 };
+                if(custom_LOG)
                 Log.d(TAG, "onClick: SmartCopy");
 
             }
@@ -143,6 +147,7 @@ public class MultiCopy extends View {
                 notesModel.setNote(thisText.getText());
                 notesModel.setCreatedAt(DateFormat.getDateTimeInstance().format(new Date()));
                 realm.commitTransaction();
+                if(custom_LOG)
                 Log.d(TAG, "onClick: saved to DB ");
             }
         });
@@ -173,12 +178,14 @@ public class MultiCopy extends View {
     public void clearArrayData() {
         list.clear();
         Serializer.setStringToArrayPrefs(mContext, list);
+        if(custom_LOG)
         Log.d(TAG, "clearArrayData: " + list.toString());
         copyDataAdapter.notifyDataSetChanged();
     }
 
     public void checkSmartCopy(){
         boolean copyToggle = sharedPreferences.getBoolean(Constants.SMART_COPY_PREFS,false);
+        if(custom_LOG)
         Log.d(TAG, "checkSmartCopy: " + checkServiceRunning());
         if(copyToggle){
             tvsmartCopy.setText("Enable\nSmart Copy");
@@ -191,10 +198,13 @@ public class MultiCopy extends View {
         Boolean check = false;
             ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
             for(ActivityManager.RunningServiceInfo service : activityManager.getRunningServices(Integer.MAX_VALUE)) {
+                if(custom_LOG)
                 Log.d(TAG, "checkServiceRunning: " + service.service.getPackageName());
             }
         return check;
     }
+
+    contex
 
 
 }

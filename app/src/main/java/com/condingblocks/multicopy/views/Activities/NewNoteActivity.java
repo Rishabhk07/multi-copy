@@ -18,6 +18,7 @@ import java.util.Date;
 
 public class NewNoteActivity extends AppCompatActivity {
 
+    public static final boolean newNote_LOG = false;
     EditText etNotes;
     public static final String TAG = "NewNotesActivity";
     @Override
@@ -52,10 +53,12 @@ public class NewNoteActivity extends AppCompatActivity {
 
     public void saveResultIntent(){
         Intent i = new Intent();
+        if(newNote_LOG)
         Log.d(TAG, "saveResultIntent: " + etNotes.getText());
         i.putExtra(Constants.ACTIVITY_NEW_NOTE_TEXT,etNotes.getText().toString());
         i.putExtra(Constants.ACTIVITY_NEW_NOTE_CREATED, DateFormat.getDateTimeInstance().format(new Date()));
         setResult(Constants.NEW_NOTE_ACTIVTY_KEY,i);
+        if(newNote_LOG)
         Log.d(TAG, "saveResultIntent: ");
     }
 }

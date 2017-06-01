@@ -51,6 +51,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
     ActionMode actionMode;
     ArrayList<NotesModel> notesList = new ArrayList<>();
     public static final String TAG = "NotesFragment";
+    public static final boolean notesFragment_LOG = false;
     public NotesFragment() {
         // Required empty public constructor
     }
@@ -64,6 +65,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
         recyclerView = (RecyclerView) root.findViewById(R.id.rvNotesList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         notesList = new ArrayList<>();
+        if (notesFragment_LOG)
         Log.d(TAG, "onCreateView: " + notesList.toString());
         notesAdapter = new NotesAdapter(notesList,getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -85,6 +87,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //since adapter is calling an activity
+        if (notesFragment_LOG)
         Log.d(TAG, "onActivityResult: ");
         if(requestCode == Constants.NOTES_RESULT){
             Log.d(TAG, "onActivityResult: ");
@@ -108,6 +111,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
 
     @Override
     public void onNotesEdit(String notes, int position) {
+        if (notesFragment_LOG)
         Log.d(TAG, "onNotesEdit: " + notes);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
@@ -119,6 +123,7 @@ public class NotesFragment extends Fragment implements onNotesEdit,onNewNote{
 
     @Override
     public void onNewNote(String note,String createdAt) {
+        if (notesFragment_LOG)
         Log.d(TAG, "onNewNote: " + note  +  " " + createdAt);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();

@@ -13,7 +13,7 @@
             android:layout_marginTop="40dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="you can add the all the copied texts to notes or you can start a new clip to the delete previous copied text and start copy from a new cleaned clip"
+            android:text="you can add all the copied texts to notes or you can start a new clip to the delete previous copied text and start copy with a new cleaned clip"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
