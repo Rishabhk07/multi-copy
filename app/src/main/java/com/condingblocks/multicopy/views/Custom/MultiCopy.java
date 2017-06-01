@@ -204,7 +204,6 @@ public class MultiCopy extends View {
         return check;
     }
 
-    contex
 
 
 }
