@@ -5,7 +5,7 @@
     android:id="@+id/activity_note_edit_actvity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.condingblocks.multicopy.views.Activities.NoteEditActvity">
+    tools:context="com.condingblocks.multicopy.me.condingblocks.multicopy.views.Activities.NoteEditActvity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"

@@ -11,6 +11,7 @@
         card_view:cardElevation="4dp"
         card_view:cardCornerRadius="3dp"
         android:backgroundTint="@android:color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="3"
+                android:weightSum="4"
                 android:gravity="bottom"
                 android:layout_gravity="bottom"
                 >
@@ -86,15 +87,16 @@
                     android:id="@+id/flTakeNotes"
                     android:clickable="true"
                     android:focusable="true"
-
+                    android:layout_gravity="center"
                     >
                     <include
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         layout="@layout/add_notes_layout"
                         android:id="@+id/btnLayout"
                         ></include>
                 </FrameLayout>
+
 
                 <FrameLayout
                     android:layout_width="0dp"
@@ -111,6 +113,31 @@
                     android:id="@+id/btnLayout"
                     ></include>
                 </FrameLayout>
+
+
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/flPaste"
+                    android:clickable="true"
+                    android:focusable="true"
+
+                    >
+                    <include
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        layout="@layout/paste_layout"
+                        android:id="@+id/btnLayout"
+                        ></include>
+                </FrameLayout>
+
+
+
+
+
                 <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -141,7 +168,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rvList"
                 android:layout_below="@+id/heading"
-                android:layout_above="@id/bottomOptions"></android.support.v7.widget.RecyclerView>
+                android:layout_above="@id/bottomOptions"
+                android:layout_alignParentStart="true"></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
