@@ -50,10 +50,10 @@ public class CopyDataAdapter extends RecyclerView.Adapter<CopyDataAdapter.CopyDa
         holder.llDialogTupple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isThisChecked){
+                if(!listCheckBox.get(position)){
                     holder.checkBoxSelected.setChecked(true);
                     listCheckBox.set(position,true);
-                }else if(isThisChecked){
+                }else if(listCheckBox.get(position)){
                     holder.checkBoxSelected.setChecked(false);
                     listCheckBox.set(position,false);
                 }

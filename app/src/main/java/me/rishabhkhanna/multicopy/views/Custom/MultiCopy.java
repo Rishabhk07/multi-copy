@@ -168,8 +168,12 @@ public class MultiCopy extends View {
                             buffer += list.get(i) + "\n";
                         }
                     }
-                    onPasteIntent.onPasteSetIntent(buffer);
-                    removeCallback.onViewRemoved();
+                    if(!buffer.equals("")) {
+                        onPasteIntent.onPasteSetIntent(buffer);
+                        removeCallback.onViewRemoved();
+                    }else{
+                        Toast.makeText(mContext, "No Text Selected to Paste", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
