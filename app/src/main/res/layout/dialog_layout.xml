@@ -90,7 +90,7 @@
                     android:layout_gravity="center"
                     >
                     <include
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_width="match_parent"
                         layout="@layout/add_notes_layout"
                         android:id="@+id/btnLayout"

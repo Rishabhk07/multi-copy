@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/llDialogTupple"
+    android:clickable="true"
+    android:background="@drawable/ripple"
     >
     <TextView
         android:layout_width="322dp"
