@@ -144,15 +144,26 @@ public class MultiCopy extends View {
             @Override
             public void onClick(View v) {
 
+                String buffer = "";
+                for (int i = 0 ; i < list.size(); i++ ){
+                    if(listCheckBox.get(i) == true){
+                        buffer += list.get(i) + "\n";
+                    }
+                }
+                if(!buffer.equals("")) {
+                    realm.beginTransaction();
+                    //do all the realm saving work here
+                    NotesModel notesModel = realm.createObject(NotesModel.class);
+                    notesModel.setNote(buffer);
+                    notesModel.setCreatedAt(DateFormat.getDateTimeInstance().format(new Date()));
+                    realm.commitTransaction();
+                    if (custom_LOG)
+                        Log.d(TAG, "onClick: saved to DB ");
 
-                realm.beginTransaction();
-                //do all the realm saving work here
-                NotesModel notesModel = realm.createObject(NotesModel.class);
-                notesModel.setNote(thisText.getText());
-                notesModel.setCreatedAt(DateFormat.getDateTimeInstance().format(new Date()));
-                realm.commitTransaction();
-                if(custom_LOG)
-                Log.d(TAG, "onClick: saved to DB ");
+                    Toast.makeText(mContext, "Notes Added", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(mContext, "No Text Selected to add Notes", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -189,9 +200,7 @@ public class MultiCopy extends View {
         tvJustCopied.setText(copiedText);
 
         list = thisText.getTextArrayList();
-//        Log.d(TAG, "addToWindowManager: array size" + list.size());
         listCheckBox = new ArrayList<>(Collections.nCopies(list.size(),false));
-//        Log.d(TAG, "addToWindowManager: Boolean Array Size" + listCheckBox.size());
         ClipData thisClip = ClipData.newPlainText(Constants.label, thisText.getText());
         clipboardManager.setPrimaryClip(thisClip);
         copyDataAdapter = new CopyDataAdapter(list, listCheckBox,mContext);
