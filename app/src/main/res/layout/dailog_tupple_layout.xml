@@ -19,11 +19,14 @@
         android:text="Rishabh Khanna arnav gupta ddxxxsssxddddddccccccccddcccccdd"
         android:ellipsize="end"
         />
+
     <CheckBox
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="right"
         android:id="@+id/lvCheckbox"
         android:checked="false"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:layout_marginTop="7dp"
         />
 </LinearLayout>
