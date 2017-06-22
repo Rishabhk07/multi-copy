@@ -18,10 +18,12 @@ import java.util.ArrayList;
 
 public class Serializer {
     public static final String TAG = "Serializer";
+    public static final boolean serializer_LOG = false;
     public static void setStringToArrayPrefs(Context context , ArrayList<String> values ){
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS_DB_NAME , Context.MODE_APPEND);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         JSONArray jsonArray= new JSONArray();
+        if (serializer_LOG)
         Log.d(TAG, "setStringToArrayPrefs:" + values.toString());
         for(int i = 0 ;i < values.size() ; i ++ ){
             jsonArray.put(values.get(i));
@@ -35,7 +37,7 @@ public class Serializer {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.PREFS_DB_NAME,Context.MODE_PRIVATE);
         String json = sharedPreferences.getString(Constants.PREFS_KEY,null);
         String storeCopyData  = "";
-
+        if (serializer_LOG)
         Log.d(TAG, "getStringFromSharedPrefs: " + json);
         ArrayList<String> arrayList = new ArrayList<>();
         if (json != null){

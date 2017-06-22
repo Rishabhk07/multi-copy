@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.condingblocks.multicopy.R;
@@ -35,22 +36,11 @@ import io.realm.Realm;
 
 public class BaseActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public static final String TAG = "BaseActivity";
     NotesFragment notesFragment = new NotesFragment();
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
+    public static final boolean RELEASE_LOG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +172,9 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "onActivityResult: ");
+        if(RELEASE_LOG) {
+            Log.d(TAG, "onActivityResult: ");
+        }
         if(requestCode == Constants.NOTES_RESULT){
 
             if(data != null){
@@ -192,10 +184,12 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
         if(resultCode == Constants.NEW_NOTE_ACTIVTY_KEY){
+            if(RELEASE_LOG)
             Log.d(TAG, "onActivityResult: without null check");
             if (data != null){
                 String text = data.getStringExtra(Constants.ACTIVITY_NEW_NOTE_TEXT);
                 String createdAt = data.getStringExtra(Constants.ACTIVITY_NEW_NOTE_CREATED);
+                if (RELEASE_LOG)
                 Log.d(TAG, "onActivityResult: with null check" + text + " " + createdAt );
                 notesFragment.onNewNote(text,createdAt);
             }
@@ -206,4 +200,5 @@ public class BaseActivity extends AppCompatActivity {
     public NotesFragment getRecyclerViewFragment(){
         return notesFragment;
     }
+
 }

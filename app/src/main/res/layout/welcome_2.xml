@@ -10,10 +10,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
-            android:text="All your copied texts will be shown in a dialog together and after you multi copy, all the text shown will be pasted together. "
+            android:text="All your copied texts will be shown in a dialog after you select multi copy from cut copy paste menu and all the text shown will be pasted together when you paste next time."
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"

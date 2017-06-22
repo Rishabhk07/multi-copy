@@ -22,6 +22,7 @@ public class NoteEditActvity extends AppCompatActivity {
     Gson gson = new Gson();
     public static final String TAG = "NotesEdit";
     int position;
+    public static final boolean notesEdit_LOG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,9 @@ public class NoteEditActvity extends AppCompatActivity {
         Intent i = getIntent();
         String thisNote = i.getStringExtra(Constants.NOTES_EDIT_TEXT);
         position = i.getIntExtra(Constants.NOTES_EDIT_POSITION,0);
-        Log.d(TAG, "onCreate: ");
+
         etNotesDetail = (EditText) findViewById(R.id.etNoteEdit);
+        if(notesEdit_LOG)
         Log.d(TAG, "onCreate: " + thisNote);
         etNotesDetail.setText(thisNote);
         if(thisNote != null)
@@ -63,6 +65,7 @@ public class NoteEditActvity extends AppCompatActivity {
     }
     public void saveResultIntent(){
         Intent i = new Intent();
+        if(notesEdit_LOG)
         Log.d(TAG, "saveResultIntent: " + etNotesDetail.getText());
         i.putExtra(Constants.ACTIVITY_RESULT_TEXT,etNotesDetail.getText().toString());
         i.putExtra(Constants.ACTIVITY_RESULT_POSITION,position);

@@ -17,7 +17,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".views.TryActivity" />
         <activity
             android:name=".views.Activities.BaseActivity"
             android:theme="@style/AppTheme.NoActionBar">
