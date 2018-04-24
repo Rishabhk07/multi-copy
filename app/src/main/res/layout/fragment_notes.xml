@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.condingblocks.multicopy.views.Fragments.NotesFragment">
+    tools:context="com.condingblocks.multicopy.me.condingblocks.multicopy.views.Fragments.NotesFragment">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

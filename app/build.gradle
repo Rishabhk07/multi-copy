@@ -20,8 +20,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "com.condingblocks.multicopy"
-        minSdkVersion 21
+        applicationId "me.rishabhkhanna.multicopy"
+        minSdkVersion 23
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"

@@ -3,20 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_screen4">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="@dimen/desc_padding"
                 android:paddingRight="@dimen/desc_padding"
-                android:text="Copy multiple texts from whatsapp messages even from diffrent chats by Enabling Smart Copy."
+                android:text="Copy multiple texts from whatsapp messages even from different chats by Enabling Smart Copy."
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 />
 
             <TextView
@@ -28,7 +32,7 @@
                 android:text="After enabling smart copy, you can use copy from cut copy paste menu on multiple texts for multiple times to copy all the texts together. Dont Forget to disable it after use"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 />
 
         <LinearLayout
@@ -40,7 +44,7 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:src="@drawable/screenshot_smart_copy"
+            android:src="@drawable/screenshot_new_agian_enable_smart"
             android:layout_height="350dp"
             android:layout_gravity="bottom"
             android:paddingBottom="@dimen/dots_margin_bottom"

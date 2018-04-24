@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.condingblocks.multicopy.views.Activities.BaseActivity$PlaceholderFragment">
+    tools:context="com.condingblocks.multicopy.me.condingblocks.multicopy.views.Activities.BaseActivity$PlaceholderFragment">
 
     <TextView
         android:id="@+id/section_label"

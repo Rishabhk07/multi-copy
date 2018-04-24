@@ -5,17 +5,17 @@
     android:background="@color/bg_screen1">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="1"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+        android:layout_centerInParent="true"
+        android:id="@+id/linearLayout"
+        android:paddingBottom="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:paddingLeft="@dimen/desc_padding"
             android:paddingRight="@dimen/desc_padding"
             android:text="Access all your notes and current multi copy clipboard from the app. Make new notes and delete old ones here"
@@ -25,7 +25,7 @@
             />
 
     <ImageView
-        android:src="@drawable/screenshots_notes"
+        android:src="@drawable/screenshot_note"
         android:layout_width="wrap_content"
         android:layout_height="350dp"
         android:id="@+id/imageView"

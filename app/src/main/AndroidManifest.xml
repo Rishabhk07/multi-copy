@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.condingblocks.multicopy">
+    package="me.rishabhkhanna.multicopy">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,16 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".Services.TextCaptureService"
+            android:name="me.rishabhkhanna.multicopy.Services.TextCaptureService"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name=".views.Activities.BaseActivity"
+            android:name="me.rishabhkhanna.multicopy.views.Activities.BaseActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".views.Activities.TextCallActivity"
+            android:name="me.rishabhkhanna.multicopy.views.Activities.TextCallActivity"
             android:theme="@style/Theme.AppCompat.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -30,14 +30,14 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.Activities.NoteEditActvity" />
-        <activity android:name=".views.Activities.NewNoteActivity" />
+        <activity android:name="me.rishabhkhanna.multicopy.views.Activities.NoteEditActvity" />
+        <activity android:name="me.rishabhkhanna.multicopy.views.Activities.NewNoteActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="658284e411bf6dd78736577db09381b9352bc92c" />
 
-        <activity android:name=".views.Activities.WelcomeActivity">
+        <activity android:name="me.rishabhkhanna.multicopy.views.Activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
